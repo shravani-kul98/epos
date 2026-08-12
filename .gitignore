@@ -1,0 +1,65 @@
+# Environment / secrets
+.env
+.env.*
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+coverage/
+coverage.xml
+htmlcov/
+
+# Node / frontend build and test output
+node_modules/
+frontend/node_modules/
+# Ship the verified interface build so a fresh clone runs without Node
+!frontend/dist/
+frontend/build/
+frontend/coverage/
+frontend/test-results/
+backend-test-results/
+test-results/
+npm-debug.log*
+*.log
+logs/
+*.pid
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+*.db.pre-audit-backup
+
+# Locally generated development account password
+.local-credentials.txt
+
+# Local approval log (user-generated content)
+data/approval_log.json
+
+# Local-only output from scripts/live_verify_ai.py, if ever redirected to a file
+*.local.json
+live_verification_results.local.json
+
+# Editor / OS artefacts
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

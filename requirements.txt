@@ -1,0 +1,23 @@
+streamlit>=1.49
+pandas>=2.2
+pydantic>=2.7
+plotly>=5.22
+python-dotenv>=1.0
+requests>=2.32
+
+# EPOS service layer
+fastapi>=0.115
+uvicorn[standard]>=0.30
+sqlmodel>=0.0.22
+alembic>=1.14
+email-validator>=2.2
+
+# Authentication
+pyjwt>=2.9
+argon2-cffi>=23.1
+
+# Development / quality tooling
+pytest>=8.2
+ruff>=0.5
+black>=24.4
+httpx>=0.27
