@@ -1,0 +1,17 @@
+requirement_id,project_id,requirement_text,requirement_type,priority,status,owner,last_updated_date
+REQ-2001,P-002,Programme shall track verified supplier CO2 baselines,Functional,High,Approved,Dana Cole,2026-07-30
+REQ-2002,P-002,Programme shall report decarbonisation progress quarterly,Functional,Medium,Approved,Alex Morgan,2026-07-15
+REQ-7001,P-007,System shall migrate all legacy requirements with attributes,Functional,High,Changed,Morgan Reid,2026-08-01
+REQ-7002,P-007,System shall provide a requirements traceability view,Functional,High,Approved,Priya Nair,2026-07-20
+REQ-7003,P-007,System shall export requirements to CSV,Functional,Low,Approved,Jordan Lee,2026-06-30
+REQ-1101,P-011,Cells shall withstand thermal propagation without external flame,Safety,Critical,Approved,Marta Lindqvist,2026-05-29
+REQ-1102,P-011,Qualification evidence shall cover three production lots,Functional,High,Approved,Marta Lindqvist,2026-06-26
+REQ-1401,P-014,Sustained yield shall exceed the agreed baseline by four points,Performance,High,Approved,Chen Wei,2026-04-24
+REQ-1901,P-019,Firmware shall meet interference limits across all channels,Performance,Critical,Approved,Tomas Beck,2026-03-27
+REQ-1902,P-019,Release shall include a documented deviation list,Functional,Medium,Draft,Tomas Beck,2026-07-10
+REQ-2301,P-023,Migrated supplier records shall retain original identifiers,Functional,High,Approved,Ines Duarte,2026-05-15
+REQ-2701,P-027,Safety case shall address every identified hazard,Safety,Critical,Approved,Rahul Menon,2026-04-24
+REQ-2702,P-027,Assessor findings shall be closed with recorded evidence,Compliance,Critical,Draft,Aisha Rahman,2026-08-07
+REQ-3101,P-031,Automated suites shall publish results to the shared dashboard,Functional,Medium,Approved,Sofia Almeida,2026-07-24
+REQ-3501,P-035,Packaging shall reduce material mass by fifteen percent,Performance,High,Approved,Jonas Weber,2026-02-27
+REQ-3502,P-035,Alternative material shall pass customer qualification,Functional,Critical,Draft,Jonas Weber,2026-06-19

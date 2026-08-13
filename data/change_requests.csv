@@ -1,0 +1,6 @@
+change_request_id,project_id,requirement_id,change_description,reason,priority,status,requested_by,requested_date
+CR-042,P-007,REQ-7001,Add mandatory attribute mapping for safety-related requirements,Regulatory compliance update,High,Approved,Priya Nair,2026-08-05
+CR-018,P-002,REQ-2002,Increase decarbonisation progress reporting to monthly,Executive reporting request,Medium,Proposed,Alex Morgan,2026-08-12
+CR-101,P-019,REQ-1901,Relax interference limit on two low-use channels,Test findings show limits are unachievable without a silicon change,High,Proposed,Tomas Beck,2026-08-12
+CR-102,P-027,REQ-2702,Add explicit evidence template for assessor findings,Assessor requested a consistent evidence format,Medium,Proposed,Aisha Rahman,2026-08-18
+CR-103,P-035,REQ-3502,Permit a second alternative material for qualification,Reduces dependency on a single customer decision,High,Proposed,Jonas Weber,2026-08-06

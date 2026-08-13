@@ -1,0 +1,9 @@
+dependency_id,project_id,predecessor_type,predecessor_id,successor_type,successor_id,dependency_name,status,delay_days,criticality
+D-2001,P-002,Supplier,SUP-Delta,Milestone,M-202,Supplier decarbonisation plan submission,Delayed,30,Critical
+D-2002,P-002,Task,T-2001,Task,T-2002,Baseline data before negotiation,On Track,0,High
+D-7001,P-007,Task,T-7001,Task,T-7002,Migration before validation,Delayed,15,High
+D-7002,P-007,Milestone,M-702,Milestone,M-703,Migration complete before release,On Track,0,Critical
+D-1101,P-011,Supplier,SUP-Cellworks,Milestone,M-1102,Second-source cell delivery,Delayed,21,Critical
+D-1901,P-019,Supplier,SUP-Antenna,Milestone,M-1902,Updated antenna sample delivery,Delayed,45,Critical
+D-2701,P-027,External,ASSESSOR,Milestone,M-2702,Independent assessor review slot,Delayed,35,Critical
+D-3501,P-035,Customer,CUST-Northwind,Milestone,M-3502,Customer qualification decision,Delayed,60,Critical

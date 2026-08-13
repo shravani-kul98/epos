@@ -1,0 +1,10 @@
+project_id,project_name,domain,project_manager,start_date,baseline_end_date,forecast_end_date,status_update_date,project_phase,business_priority
+P-002,Supplier Decarbonisation Programme,Sustainability,Alex Morgan,2025-09-01,2026-06-30,2026-09-15,2026-08-20,Execution,High
+P-007,Engineering Requirements Digitalisation,Digital Engineering,Priya Nair,2025-11-01,2026-05-31,2026-07-31,2026-07-05,Execution,High
+P-011,Battery Cell Qualification,Powertrain,Marta Lindqvist,2025-11-03,2026-10-30,2026-11-27,2026-08-22,Execution,Critical
+P-014,Wafer Fab Yield Improvement,Manufacturing,Chen Wei,2025-06-16,2026-09-30,2026-09-30,2026-08-24,Execution,High
+P-019,Automotive Radar Firmware Release,Embedded Software,Tomas Beck,2026-01-12,2026-08-31,2026-11-13,2026-07-10,Validation,Critical
+P-023,Supplier Data Migration,IT Systems,Ines Duarte,2026-02-02,2026-11-30,2026-12-18,2026-08-19,Execution,Medium
+P-027,Functional Safety Certification,Compliance,Rahul Menon,2025-10-06,2026-12-15,2027-02-26,2026-08-21,Qualification,Critical
+P-031,Test Lab Automation,Test Engineering,Sofia Almeida,2026-03-16,2027-01-29,2027-01-29,2026-08-25,Development,Medium
+P-035,Packaging Sustainability Redesign,Sustainability,Jonas Weber,2025-08-04,2026-07-31,2026-10-30,2026-06-30,Execution,High

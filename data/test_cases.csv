@@ -1,0 +1,13 @@
+test_case_id,project_id,test_case_name,status,owner,verification_evidence,last_updated_date
+TC-2001,P-002,Verify CO2 baseline calculation,Passed,Dana Cole,EVID-2001,2026-07-28
+TC-7001,P-007,Verify migrated requirement count,Passed,Morgan Reid,EVID-7001,2026-07-18
+TC-7002,P-007,Verify traceability view links,Failed,Priya Nair,,2026-07-19
+TC-7003,P-007,Verify requirements migration integrity,Not Run,Jordan Lee,,2026-07-10
+TC-1101,P-011,Thermal propagation containment test,Failed,Erik Sandberg,,2026-08-14
+TC-1102,P-011,Three-lot qualification evidence review,Not Run,Marta Lindqvist,,2026-08-22
+TC-1401,P-014,Sustained yield verification across lots,Passed,Hannah Fischer,EVID-1401,2026-08-21
+TC-1901,P-019,Channel interference limit verification,Failed,Lena Vogt,,2026-07-24
+TC-2301,P-023,Identifier retention check after migration,Passed,Ines Duarte,EVID-2301,2026-08-14
+TC-2701,P-027,Hazard coverage completeness review,Not Run,Aisha Rahman,,2026-08-07
+TC-3101,P-031,Dashboard result publication check,Passed,Diego Ramos,EVID-3101,2026-08-25
+TC-3501,P-035,Material mass reduction measurement,Passed,Nora Haugen,EVID-3501,2026-06-19

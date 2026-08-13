@@ -1,0 +1,27 @@
+milestone_id,project_id,milestone_name,baseline_date,forecast_date,status,criticality,owner
+M-201,P-002,Supplier Baseline Emissions Verified,2026-03-31,2026-03-28,Completed,High,Dana Cole
+M-202,P-002,Supplier Decarbonisation Plans Signed,2026-06-30,2026-08-15,At Risk,Critical,Sam Patel
+M-203,P-002,Programme Release Gate 1,2026-09-15,2026-10-10,At Risk,Critical,Alex Morgan
+M-701,P-007,Requirements Data Model Approved,2026-02-28,2026-02-25,Completed,High,Morgan Reid
+M-702,P-007,Requirements Migration Complete,2026-05-31,2026-07-20,At Risk,Critical,Jordan Lee
+M-703,P-007,Digitalisation Release 1,2026-07-31,2026-09-05,At Risk,Critical,Priya Nair
+M-1101,P-011,Cell Supplier Selected,2026-02-27,2026-02-25,Completed,High,Marta Lindqvist
+M-1102,P-011,Thermal Abuse Testing Complete,2026-07-31,2026-09-18,At Risk,Critical,Marta Lindqvist
+M-1103,P-011,Qualification Report Signed,2026-10-30,2026-11-27,Not Started,Critical,Marta Lindqvist
+M-1401,P-014,Baseline Yield Measured,2025-12-19,2025-12-17,Completed,High,Chen Wei
+M-1402,P-014,Process Window Optimised,2026-06-30,2026-06-26,Completed,High,Chen Wei
+M-1403,P-014,Sustained Yield Target Met,2026-09-30,2026-09-30,On Track,High,Chen Wei
+M-1901,P-019,Feature Freeze,2026-04-30,2026-06-12,Completed,High,Tomas Beck
+M-1902,P-019,Interference Test Campaign Complete,2026-07-15,2026-10-02,At Risk,Critical,Tomas Beck
+M-1903,P-019,Customer Release Candidate,2026-08-31,2026-11-13,At Risk,Critical,Tomas Beck
+M-2301,P-023,Legacy Data Profiled,2026-05-29,2026-06-05,Completed,Medium,Ines Duarte
+M-2302,P-023,Pilot Migration Complete,2026-09-30,2026-10-16,At Risk,High,Ines Duarte
+M-2303,P-023,Full Cutover,2026-11-30,2026-12-18,Not Started,High,Ines Duarte
+M-2701,P-027,Hazard Analysis Approved,2026-03-31,2026-04-24,Completed,Critical,Rahul Menon
+M-2702,P-027,Safety Case Submitted,2026-09-30,2026-12-04,At Risk,Critical,Rahul Menon
+M-2703,P-027,Certification Granted,2026-12-15,2027-02-26,Not Started,Critical,Rahul Menon
+M-3101,P-031,Automation Framework Selected,2026-06-30,2026-06-24,Completed,Medium,Sofia Almeida
+M-3102,P-031,First Suite Automated,2026-10-30,2026-10-30,On Track,Medium,Sofia Almeida
+M-3501,P-035,Material Alternatives Assessed,2026-02-27,2026-03-20,Completed,High,Jonas Weber
+M-3502,P-035,Customer Approval Obtained,2026-06-30,2026-09-25,At Risk,Critical,Jonas Weber
+M-3503,P-035,Production Changeover,2026-07-31,2026-10-30,At Risk,High,Jonas Weber

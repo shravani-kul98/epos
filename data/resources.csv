@@ -1,0 +1,14 @@
+resource_id,resource_name,project_id,allocated_hours,capacity_hours,week_start_date
+RES-2001,Sam Patel,P-002,48,40,2026-08-24
+RES-2002,Alex Morgan,P-002,32,40,2026-08-24
+RES-7001,Jordan Lee,P-007,46,40,2026-08-24
+RES-7002,Priya Nair,P-007,30,40,2026-08-24
+RES-1101,Marta Lindqvist,P-011,44,40,2026-08-24
+RES-1102,Erik Sandberg,P-011,38,40,2026-08-24
+RES-1401,Chen Wei,P-014,36,40,2026-08-24
+RES-1901,Tomas Beck,P-019,52,40,2026-08-24
+RES-1902,Lena Vogt,P-019,34,40,2026-08-24
+RES-2301,Ines Duarte,P-023,41,40,2026-08-24
+RES-2701,Rahul Menon,P-027,46,40,2026-08-24
+RES-3101,Sofia Almeida,P-031,32,40,2026-08-24
+RES-3501,Jonas Weber,P-035,40,40,2026-08-24

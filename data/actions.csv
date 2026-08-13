@@ -1,0 +1,15 @@
+action_id,project_id,action_description,owner,due_date,status,priority,source_reference
+A-2001,P-002,Assign mitigation owner to supplier decarbonisation risk,Alex Morgan,2026-08-10,Open,High,R-2001
+A-2002,P-002,Confirm Q3 verified emissions data,Dana Cole,2026-09-10,Open,Medium,M-201
+A-7001,P-007,Resolve requirements validation blocker,Priya Nair,2026-07-20,Open,High,T-7002
+A-7002,P-007,Schedule dashboard user acceptance testing,Jordan Lee,2026-09-20,Open,Medium,M-703
+A-1101,P-011,Secure dedicated thermal chamber slots for September,Marta Lindqvist,2026-09-04,Open,High,R-1101
+A-1102,P-011,Assign an owner to the second-source qualification risk,Marta Lindqvist,2026-08-14,Open,High,R-1102
+A-1401,P-014,Publish sustained yield results to the steering group,Chen Wei,2026-10-02,Open,Medium,M-1403
+A-1901,P-019,Escalate antenna sample delay with the supplier,Tomas Beck,2026-08-07,Open,High,R-1901
+A-1902,P-019,Agree a revised customer release date,Tomas Beck,2026-09-04,Open,High,M-1903
+A-2301,P-023,Confirm the cutover window with IT operations,Ines Duarte,2026-09-25,Open,Medium,R-2302
+A-2701,P-027,Book the assessor resubmission slot,Rahul Menon,2026-08-28,Open,High,R-2701
+A-2702,P-027,Assign an owner to the assessor availability risk,Rahul Menon,2026-08-14,Open,High,R-2701
+A-3101,P-031,Add the licence renewal to the budget submission,Sofia Almeida,2026-10-30,Open,Low,R-3101
+A-3501,P-035,Prepare a fallback material option for review,Jonas Weber,2026-08-07,Open,High,R-3501

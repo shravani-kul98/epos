@@ -1,0 +1,26 @@
+task_id,project_id,milestone_id,task_name,owner,status,planned_end_date,forecast_end_date,completion_percent,is_blocked,last_updated_date
+T-2001,P-002,M-202,Collect supplier emission baselines,Sam Patel,Blocked,2026-06-15,2026-08-10,60,TRUE,2026-08-18
+T-2002,P-002,M-202,Negotiate decarbonisation commitments,Alex Morgan,In Progress,2026-06-25,2026-08-14,40,FALSE,2026-08-19
+T-2003,P-002,M-201,Establish emissions measurement method,Dana Cole,Completed,2026-03-20,2026-03-20,100,FALSE,2026-03-21
+T-2004,P-002,M-203,Prepare release gate documentation,Sam Patel,Not Started,2026-08-10,2026-09-01,0,FALSE,2026-06-30
+T-7001,P-007,M-702,Migrate legacy requirements,Jordan Lee,In Progress,2026-05-20,2026-07-15,70,FALSE,2026-06-28
+T-7002,P-007,M-702,Validate migrated requirements,Priya Nair,Blocked,2026-06-10,2026-07-18,30,TRUE,2026-07-02
+T-7003,P-007,M-701,Define requirements schema,Morgan Reid,Completed,2026-02-20,2026-02-22,100,FALSE,2026-02-23
+T-7004,P-007,M-703,Build requirements dashboard,Jordan Lee,In Progress,2026-07-25,2026-08-30,50,FALSE,2026-08-22
+T-1101,P-011,M-1102,Run thermal propagation test series,Marta Lindqvist,In Progress,2026-07-10,2026-09-11,55,FALSE,2026-08-21
+T-1102,P-011,M-1102,Rebuild test fixture after chamber failure,Erik Sandberg,Blocked,2026-06-30,2026-09-04,20,TRUE,2026-08-14
+T-1103,P-011,M-1103,Compile qualification evidence pack,Marta Lindqvist,Not Started,2026-10-16,2026-11-20,0,FALSE,2026-08-22
+T-1401,P-014,M-1403,Tune deposition uniformity,Chen Wei,In Progress,2026-08-28,2026-08-28,70,FALSE,2026-08-24
+T-1402,P-014,M-1403,Validate yield across three lots,Hannah Fischer,In Progress,2026-09-18,2026-09-18,40,FALSE,2026-08-24
+T-1403,P-014,M-1402,Document optimised process window,Chen Wei,Complete,2026-06-26,2026-06-26,100,FALSE,2026-06-26
+T-1901,P-019,M-1902,Close interference test findings,Tomas Beck,In Progress,2026-07-03,2026-09-25,35,FALSE,2026-07-28
+T-1902,P-019,M-1902,Await updated antenna samples,Lena Vogt,Blocked,2026-06-19,2026-09-11,10,TRUE,2026-07-15
+T-1903,P-019,M-1903,Prepare customer release notes,Tomas Beck,Not Started,2026-08-21,2026-11-06,0,FALSE,2026-07-10
+T-2301,P-023,M-2302,Reconcile duplicate supplier records,Ines Duarte,In Progress,2026-08-14,2026-10-09,45,FALSE,2026-08-19
+T-2302,P-023,M-2302,Build migration rollback procedure,Ines Duarte,In Progress,2026-09-11,2026-09-25,30,FALSE,2026-08-19
+T-2701,P-027,M-2702,Complete safety argument evidence,Rahul Menon,In Progress,2026-08-28,2026-11-20,40,FALSE,2026-08-21
+T-2702,P-027,M-2702,Resolve assessor findings,Aisha Rahman,Blocked,2026-07-31,2026-11-06,15,TRUE,2026-08-07
+T-3101,P-031,M-3102,Automate regression suite,Sofia Almeida,In Progress,2026-10-16,2026-10-16,50,FALSE,2026-08-25
+T-3102,P-031,M-3102,Integrate results reporting,Diego Ramos,Not Started,2026-10-23,2026-10-23,0,FALSE,2026-08-25
+T-3501,P-035,M-3502,Run customer qualification trials,Jonas Weber,In Progress,2026-06-12,2026-09-18,60,FALSE,2026-06-30
+T-3502,P-035,M-3503,Requalify sealing process,Nora Haugen,Blocked,2026-07-17,2026-10-23,25,TRUE,2026-06-26

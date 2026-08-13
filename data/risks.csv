@@ -1,0 +1,17 @@
+risk_id,project_id,risk_name,probability,impact,status,mitigation_owner,mitigation_status,due_date
+R-2001,P-002,Key supplier unable to meet decarbonisation targets,4,5,Open,,Not Started,2026-09-30
+R-2002,P-002,Carbon accounting methodology disputed,3,3,Open,Dana Cole,In Progress,2026-08-31
+R-7001,P-007,Requirements data loss during migration,4,5,Open,,Not Started,2026-08-15
+R-7002,P-007,Low user adoption of new requirements tool,2,3,Open,Morgan Reid,In Progress,2026-09-15
+R-1101,P-011,Thermal chamber capacity is shared with another programme,4,4,Open,Marta Lindqvist,In Progress,2026-09-30
+R-1102,P-011,Second-source cell supplier not yet qualified,3,5,Open,,Not Started,2026-10-16
+R-1401,P-014,Yield gain may not hold across all product families,3,3,Mitigating,Chen Wei,In Progress,2026-09-18
+R-1901,P-019,Antenna supplier cannot meet the revised sample date,5,4,Open,,Not Started,2026-09-11
+R-1902,P-019,Interference findings may require a silicon change,3,5,Open,Tomas Beck,In Progress,2026-10-02
+R-2301,P-023,Legacy records contain unresolved duplicates,4,3,Open,Ines Duarte,In Progress,2026-10-09
+R-2302,P-023,Cutover window conflicts with year-end freeze,3,4,Open,Ines Duarte,Not Started,2026-11-13
+R-2701,P-027,Assessor availability limits resubmission attempts,4,5,Open,,Not Started,2026-10-30
+R-2702,P-027,Open findings may reopen the hazard analysis,3,5,Open,Rahul Menon,In Progress,2026-11-20
+R-3101,P-031,Framework licence renewal not yet budgeted,2,3,Mitigating,Sofia Almeida,In Progress,2026-11-27
+R-3501,P-035,Customer may reject the alternative material,4,5,Open,Jonas Weber,In Progress,2026-09-18
+R-3502,P-035,Sealing requalification may extend the changeover,4,4,Open,,Not Started,2026-10-23
