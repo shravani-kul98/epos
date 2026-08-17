@@ -1,0 +1,347 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1600" viewBox="0 0 2400 1600" role="img" aria-labelledby="title desc">
+  <title id="title">EPOS technical system architecture</title>
+  <desc id="desc">C4-style architecture diagram showing the React browser runtime, FastAPI application deployment unit, security and service components, deterministic Python engines, SQLite and PostgreSQL persistence, governed Azure OpenAI integration, runtime configuration, legacy Streamlit interface, and build and verification plane.</desc>
+
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="9" flood-color="#152238" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#334155"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrowViolet" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#7C3AED"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#B45309"/>
+    </marker>
+
+    <symbol id="icon-browser" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 8h20"/><path d="M6 5.5h.01M9 5.5h.01"/></g></symbol>
+    <symbol id="icon-server" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><path d="M6 6.5h.01M6 17.5h.01M10 6.5h8M10 17.5h8"/></g></symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></g></symbol>
+    <symbol id="icon-layers" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/></g></symbol>
+    <symbol id="icon-cpu" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></g></symbol>
+    <symbol id="icon-db" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/></g></symbol>
+    <symbol id="icon-cloud" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 19a4.5 4.5 0 0 1 0-9 6 6 0 0 1 11.4 1.5A4 4 0 0 1 17.5 19h-11z"/></g></symbol>
+    <symbol id="icon-key" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 10-10M18 5l3 3M15 8l3 3"/></g></symbol>
+    <symbol id="icon-git" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 3v12M18 9a9 9 0 0 1-9 9"/></g></symbol>
+    <symbol id="icon-package" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 8-9 5-9-5 9-5 9 5zM3 8v8l9 5 9-5V8M12 13v8"/></g></symbol>
+    <symbol id="icon-file" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></g></symbol>
+
+    <style>
+      text { font-family: "Segoe UI", Arial, sans-serif; letter-spacing: 0; }
+      .zone-title { font-size: 20px; font-weight: 700; fill: #0F172A; }
+      .zone-sub { font-size: 13px; fill: #64748B; }
+      .card-title { font-size: 18px; font-weight: 700; fill: #0F172A; }
+      .card-sub { font-size: 13px; fill: #475569; }
+      .tiny { font-size: 12px; fill: #64748B; }
+      .chip { font-size: 12px; font-weight: 600; fill: #334155; }
+      .tech { font-size: 12px; font-weight: 600; fill: #FFFFFF; }
+      .mono { font-family: Consolas, "Courier New", monospace; font-size: 12px; fill: #334155; }
+      .relation { font-size: 12px; font-weight: 600; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect width="2400" height="1600" fill="#F6F8FC"/>
+  <rect x="0" y="0" width="2400" height="116" fill="#101827"/>
+  <text x="58" y="52" font-size="31" font-weight="750" fill="#FFFFFF">EPOS Technical System Architecture</text>
+  <text x="58" y="82" font-size="15" fill="#9EABC0">C4-style container and component view · runtime, trust boundaries, persistence, AI integration and build plane</text>
+
+  <g transform="translate(1770,25)">
+    <line x1="0" y1="16" x2="56" y2="16" stroke="#D6DEEA" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="68" y="21" font-size="12" fill="#D6DEEA">runtime</text>
+    <line x1="155" y1="16" x2="211" y2="16" stroke="#D6DEEA" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+    <text x="223" y="21" font-size="12" fill="#D6DEEA">build/config</text>
+    <line x1="0" y1="51" x2="56" y2="51" stroke="#A78BFA" stroke-width="2.5" marker-end="url(#arrowViolet)"/>
+    <text x="68" y="56" font-size="12" fill="#D6DEEA">external API</text>
+    <line x1="155" y1="51" x2="211" y2="51" stroke="#F0B35D" stroke-width="2.5" stroke-dasharray="3 5" marker-end="url(#arrowAmber)"/>
+    <text x="223" y="56" font-size="12" fill="#D6DEEA">prepared path</text>
+  </g>
+
+  <!-- Client trust boundary -->
+  <rect x="52" y="170" width="400" height="476" rx="16" fill="#EEF6FF" stroke="#7DB4EE" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="76" y="202" class="zone-title">CLIENT TRUST BOUNDARY</text>
+  <text x="76" y="224" class="zone-sub">Browser execution context</text>
+
+  <rect x="76" y="252" width="352" height="354" rx="14" fill="#FFFFFF" filter="url(#shadow)"/>
+  <rect x="76" y="252" width="8" height="354" rx="4" fill="#2583D8"/>
+  <use href="#icon-browser" x="104" y="278" width="38" height="38" color="#2583D8"/>
+  <text x="157" y="296" class="card-title">React SPA</text>
+  <text x="157" y="317" class="card-sub">Browser container</text>
+  <rect x="104" y="344" width="129" height="26" rx="13" fill="#2583D8"/>
+  <text x="168" y="362" class="tech" text-anchor="middle">React 18</text>
+  <rect x="241" y="344" width="151" height="26" rx="13" fill="#2583D8"/>
+  <text x="316" y="362" class="tech" text-anchor="middle">TypeScript 5.5</text>
+
+  <rect x="104" y="390" width="288" height="48" rx="9" fill="#F0F7FE" stroke="#D2E7FA"/>
+  <text x="120" y="410" class="chip">Navigation + server state</text>
+  <text x="120" y="428" class="tiny">React Router · TanStack Query</text>
+  <rect x="104" y="448" width="288" height="48" rx="9" fill="#F0F7FE" stroke="#D2E7FA"/>
+  <text x="120" y="468" class="chip">Presentation</text>
+  <text x="120" y="486" class="tiny">Tailwind · Recharts · Hook Form · Zod</text>
+  <rect x="104" y="506" width="288" height="48" rx="9" fill="#F0F7FE" stroke="#D2E7FA"/>
+  <text x="120" y="526" class="chip">HTTP client</text>
+  <text x="120" y="544" class="tiny">Fetch API · JSON · Bearer token</text>
+  <text x="104" y="580" class="tiny">No scoring logic · no backend credentials</text>
+
+  <!-- Runtime config -->
+  <rect x="52" y="682" width="400" height="250" rx="16" fill="#FFFFFF" stroke="#B6C2D3" stroke-width="1.5" filter="url(#shadow)"/>
+  <use href="#icon-key" x="76" y="706" width="30" height="30" color="#475569"/>
+  <text x="119" y="727" class="card-title">Backend environment</text>
+  <text x="76" y="759" class="mono">DATABASE_URL</text>
+  <text x="242" y="759" class="tiny">database connection</text>
+  <text x="76" y="790" class="mono">JWT_SECRET</text>
+  <text x="242" y="790" class="tiny">session signing</text>
+  <text x="76" y="821" class="mono">API_KEY + ENDPOINT</text>
+  <text x="242" y="821" class="tiny">AI transport</text>
+  <text x="76" y="852" class="mono">ENVIRONMENT</text>
+  <text x="242" y="852" class="tiny">runtime policy</text>
+  <line x1="76" y1="874" x2="428" y2="874" stroke="#E2E8F0"/>
+  <text x="76" y="899" class="tiny">Backend-only · never bundled into the SPA</text>
+
+  <!-- Legacy -->
+  <rect x="52" y="970" width="400" height="190" rx="16" fill="#F7F8FA" stroke="#ABB5C4" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <use href="#icon-browser" x="76" y="996" width="30" height="30" color="#64748B"/>
+  <text x="119" y="1017" class="card-title" fill="#475569">Legacy interface</text>
+  <rect x="76" y="1044" width="158" height="26" rx="13" fill="#64748B"/>
+  <text x="155" y="1062" class="tech" text-anchor="middle">Streamlit</text>
+  <rect x="242" y="1044" width="134" height="26" rx="13" fill="#64748B"/>
+  <text x="309" y="1062" class="tech" text-anchor="middle">Plotly</text>
+  <text x="76" y="1095" class="card-sub">CSV loader → same engine layer</text>
+  <text x="76" y="1120" class="tiny">Runnable locally · excluded from hosted package</text>
+
+  <!-- Application deployment boundary -->
+  <rect x="500" y="150" width="1162" height="1010" rx="18" fill="#FFFFFF" stroke="#4B6E9C" stroke-width="2.5"/>
+  <rect x="500" y="150" width="1162" height="58" rx="18" fill="#233A5A"/>
+  <rect x="500" y="186" width="1162" height="22" fill="#233A5A"/>
+  <use href="#icon-server" x="526" y="165" width="30" height="30" color="#FFFFFF"/>
+  <text x="568" y="188" font-size="21" font-weight="700" fill="#FFFFFF">APPLICATION DEPLOYMENT UNIT</text>
+  <text x="1635" y="187" font-size="13" fill="#C5D4E8" text-anchor="end">Python 3.11+ · FastAPI · Uvicorn · one ASGI process</text>
+
+  <!-- Application: adapters -->
+  <rect x="536" y="240" width="430" height="142" rx="13" fill="#EDF6FF" stroke="#89BCEB"/>
+  <text x="558" y="269" class="card-title">Static SPA delivery</text>
+  <rect x="558" y="286" width="126" height="24" rx="12" fill="#2583D8"/><text x="621" y="303" class="tech" text-anchor="middle">StaticFiles</text>
+  <rect x="692" y="286" width="128" height="24" rx="12" fill="#2583D8"/><text x="756" y="303" class="tech" text-anchor="middle">Vite artifact</text>
+  <text x="558" y="334" class="card-sub">Hashed assets · SPA fallback · cache policy</text>
+  <text x="558" y="357" class="tiny">Compiled React application served on the API origin</text>
+
+  <rect x="994" y="240" width="632" height="142" rx="13" fill="#EAF1FD" stroke="#86AEEB"/>
+  <text x="1016" y="269" class="card-title">REST API adapters</text>
+  <rect x="1016" y="286" width="132" height="24" rx="12" fill="#315EA8"/><text x="1082" y="303" class="tech" text-anchor="middle">/api/v1</text>
+  <rect x="1156" y="286" width="142" height="24" rx="12" fill="#315EA8"/><text x="1227" y="303" class="tech" text-anchor="middle">Pydantic v2</text>
+  <rect x="1306" y="286" width="146" height="24" rx="12" fill="#315EA8"/><text x="1379" y="303" class="tech" text-anchor="middle">OpenAPI</text>
+  <text x="1016" y="334" class="card-sub">Routers · schemas · exception mapping · health probes</text>
+  <text x="1016" y="357" class="tiny">Typed HTTP boundary; no independent score calculation</text>
+
+  <!-- Security plane -->
+  <rect x="536" y="420" width="1090" height="132" rx="13" fill="#FFF0F1" stroke="#EA8F96"/>
+  <use href="#icon-shield" x="558" y="442" width="30" height="30" color="#C7323D"/>
+  <text x="601" y="463" class="card-title">Security and governance plane</text>
+  <g>
+    <rect x="558" y="486" width="158" height="36" rx="8" fill="#FFFFFF" stroke="#F0C2C6"/><text x="637" y="508" class="chip" text-anchor="middle">Argon2id</text>
+    <rect x="730" y="486" width="158" height="36" rx="8" fill="#FFFFFF" stroke="#F0C2C6"/><text x="809" y="508" class="chip" text-anchor="middle">JWT · HS256</text>
+    <rect x="902" y="486" width="158" height="36" rx="8" fill="#FFFFFF" stroke="#F0C2C6"/><text x="981" y="508" class="chip" text-anchor="middle">RBAC</text>
+    <rect x="1074" y="486" width="188" height="36" rx="8" fill="#FFFFFF" stroke="#F0C2C6"/><text x="1168" y="508" class="chip" text-anchor="middle">Project scope</text>
+    <rect x="1276" y="486" width="158" height="36" rx="8" fill="#FFFFFF" stroke="#F0C2C6"/><text x="1355" y="508" class="chip" text-anchor="middle">Row version</text>
+    <rect x="1448" y="486" width="154" height="36" rx="8" fill="#FFFFFF" stroke="#F0C2C6"/><text x="1525" y="508" class="chip" text-anchor="middle">Audit events</text>
+  </g>
+  <text x="558" y="540" class="tiny">Protected requests: verify token → current user → permission → project scope</text>
+
+  <!-- Service plane -->
+  <rect x="536" y="590" width="1090" height="200" rx="13" fill="#EAF9F8" stroke="#74C8C2"/>
+  <use href="#icon-layers" x="558" y="612" width="30" height="30" color="#07857C"/>
+  <text x="601" y="633" class="card-title">Application services and domain orchestration</text>
+  <g>
+    <rect x="558" y="659" width="240" height="48" rx="9" fill="#FFFFFF" stroke="#B9E2DF"/><text x="678" y="680" class="chip" text-anchor="middle">Portfolio adapter</text><text x="678" y="697" class="tiny" text-anchor="middle">rows → PortfolioData</text>
+    <rect x="814" y="659" width="240" height="48" rx="9" fill="#FFFFFF" stroke="#B9E2DF"/><text x="934" y="680" class="chip" text-anchor="middle">Analytics orchestration</text><text x="934" y="697" class="tiny" text-anchor="middle">engine composition</text>
+    <rect x="1070" y="659" width="240" height="48" rx="9" fill="#FFFFFF" stroke="#B9E2DF"/><text x="1190" y="680" class="chip" text-anchor="middle">Workflow services</text><text x="1190" y="697" class="tiny" text-anchor="middle">governed CRUD</text>
+    <rect x="1326" y="659" width="276" height="48" rx="9" fill="#FFFFFF" stroke="#B9E2DF"/><text x="1464" y="680" class="chip" text-anchor="middle">AI router + evidence</text><text x="1464" y="697" class="tiny" text-anchor="middle">intent, selectors, grounding</text>
+    <rect x="558" y="721" width="240" height="48" rx="9" fill="#FFFFFF" stroke="#B9E2DF"/><text x="678" y="750" class="chip" text-anchor="middle">Search</text>
+    <rect x="814" y="721" width="240" height="48" rx="9" fill="#FFFFFF" stroke="#B9E2DF"/><text x="934" y="750" class="chip" text-anchor="middle">Activity history</text>
+    <rect x="1070" y="721" width="240" height="48" rx="9" fill="#FFFFFF" stroke="#B9E2DF"/><text x="1190" y="750" class="chip" text-anchor="middle">Business labels</text>
+    <rect x="1326" y="721" width="276" height="48" rx="9" fill="#FFFFFF" stroke="#B9E2DF"/><text x="1464" y="750" class="chip" text-anchor="middle">Authorised filtering</text>
+  </g>
+
+  <!-- Engines -->
+  <rect x="536" y="830" width="662" height="294" rx="13" fill="#ECF8F1" stroke="#78C99B"/>
+  <use href="#icon-cpu" x="558" y="852" width="30" height="30" color="#16824B"/>
+  <text x="601" y="873" class="card-title">Deterministic engine runtime</text>
+  <rect x="558" y="895" width="118" height="24" rx="12" fill="#16824B"/><text x="617" y="912" class="tech" text-anchor="middle">Python</text>
+  <rect x="684" y="895" width="168" height="24" rx="12" fill="#16824B"/><text x="768" y="912" class="tech" text-anchor="middle">typed rules</text>
+  <g>
+    <rect x="558" y="940" width="190" height="54" rx="9" fill="#FFFFFF" stroke="#B9DFC9"/><text x="653" y="963" class="chip" text-anchor="middle">Health</text><text x="653" y="981" class="tiny" text-anchor="middle">7 weighted factors</text>
+    <rect x="764" y="940" width="190" height="54" rx="9" fill="#FFFFFF" stroke="#B9DFC9"/><text x="859" y="963" class="chip" text-anchor="middle">Confidence</text><text x="859" y="981" class="tiny" text-anchor="middle">data quality</text>
+    <rect x="970" y="940" width="204" height="54" rx="9" fill="#FFFFFF" stroke="#B9DFC9"/><text x="1072" y="963" class="chip" text-anchor="middle">Early warning</text><text x="1072" y="981" class="tiny" text-anchor="middle">8 rule classes</text>
+    <rect x="558" y="1010" width="190" height="54" rx="9" fill="#FFFFFF" stroke="#B9DFC9"/><text x="653" y="1033" class="chip" text-anchor="middle">Change impact</text><text x="653" y="1051" class="tiny" text-anchor="middle">affected records</text>
+    <rect x="764" y="1010" width="190" height="54" rx="9" fill="#FFFFFF" stroke="#B9DFC9"/><text x="859" y="1033" class="chip" text-anchor="middle">Scenario</text><text x="859" y="1051" class="tiny" text-anchor="middle">non-mutating</text>
+    <rect x="970" y="1010" width="204" height="54" rx="9" fill="#FFFFFF" stroke="#B9DFC9"/><text x="1072" y="1033" class="chip" text-anchor="middle">Gate readiness</text><text x="1072" y="1051" class="tiny" text-anchor="middle">criteria + reviews</text>
+  </g>
+  <text x="558" y="1097" class="tiny">Authoritative calculations · explicit analysis date · source IDs</text>
+
+  <!-- Persistence adapter -->
+  <rect x="1234" y="830" width="392" height="294" rx="13" fill="#FFF7E8" stroke="#E8B86A"/>
+  <use href="#icon-db" x="1256" y="852" width="30" height="30" color="#B66A00"/>
+  <text x="1299" y="873" class="card-title">Persistence adapter</text>
+  <rect x="1256" y="895" width="134" height="24" rx="12" fill="#B66A00"/><text x="1323" y="912" class="tech" text-anchor="middle">SQLModel</text>
+  <rect x="1398" y="895" width="156" height="24" rx="12" fill="#B66A00"/><text x="1476" y="912" class="tech" text-anchor="middle">SQLAlchemy</text>
+  <rect x="1256" y="942" width="346" height="42" rx="8" fill="#FFFFFF" stroke="#F0D3A2"/><text x="1272" y="968" class="chip">Request-scoped session</text>
+  <rect x="1256" y="994" width="346" height="42" rx="8" fill="#FFFFFF" stroke="#F0D3A2"/><text x="1272" y="1020" class="chip">Transactions + ORM queries</text>
+  <rect x="1256" y="1046" width="346" height="42" rx="8" fill="#FFFFFF" stroke="#F0D3A2"/><text x="1272" y="1072" class="chip">Soft delete + optimistic versioning</text>
+  <text x="1256" y="1110" class="tiny">Dialect selected by runtime configuration</text>
+
+  <!-- External AI boundary -->
+  <rect x="1710" y="150" width="638" height="354" rx="18" fill="#F7F1FF" stroke="#9B72D2" stroke-width="2"/>
+  <text x="1736" y="183" class="zone-title">EXTERNAL AI SERVICE</text>
+  <text x="1736" y="205" class="zone-sub">Separately operated trust boundary</text>
+  <rect x="1736" y="235" width="586" height="228" rx="14" fill="#FFFFFF" filter="url(#shadow)"/>
+  <rect x="1736" y="235" width="8" height="228" rx="4" fill="#7C3AED"/>
+  <use href="#icon-cloud" x="1768" y="266" width="42" height="42" color="#7C3AED"/>
+  <text x="1825" y="284" class="card-title">Azure OpenAI</text>
+  <text x="1825" y="306" class="card-sub">Evidence explanation + semantic classification</text>
+  <rect x="1768" y="334" width="148" height="26" rx="13" fill="#7C3AED"/><text x="1842" y="352" class="tech" text-anchor="middle">HTTPS</text>
+  <rect x="1924" y="334" width="164" height="26" rx="13" fill="#7C3AED"/><text x="2006" y="352" class="tech" text-anchor="middle">api-key</text>
+  <rect x="2096" y="334" width="194" height="26" rx="13" fill="#7C3AED"/><text x="2193" y="352" class="tech" text-anchor="middle">strict JSON schema</text>
+  <text x="1768" y="393" class="card-sub">Selected evidence → structured draft</text>
+  <text x="1768" y="419" class="tiny">No SQL · no writes · no authoritative calculations</text>
+  <text x="1768" y="442" class="tiny">Backend checks source IDs; human review remains required</text>
+
+  <!-- Data trust boundary -->
+  <rect x="1710" y="548" width="638" height="612" rx="18" fill="#FFF9EE" stroke="#D4993D" stroke-width="2"/>
+  <text x="1736" y="581" class="zone-title">DATA PLATFORM</text>
+  <text x="1736" y="603" class="zone-sub">Relational stores and schema lifecycle</text>
+
+  <rect x="1736" y="632" width="270" height="226" rx="14" fill="#FFFFFF" stroke="#DAA654" filter="url(#shadow)"/>
+  <use href="#icon-db" x="1760" y="660" width="36" height="36" color="#B66A00"/>
+  <text x="1809" y="680" class="card-title">SQLite</text>
+  <text x="1760" y="714" class="card-sub">Verified local store</text>
+  <text x="1760" y="743" class="tiny">File-backed relational DB</text>
+  <text x="1760" y="766" class="tiny">Foreign keys enabled</text>
+  <text x="1760" y="789" class="tiny">Isolated test instances</text>
+  <rect x="1760" y="811" width="130" height="24" rx="12" fill="#B66A00"/><text x="1825" y="828" class="tech" text-anchor="middle">active locally</text>
+
+  <rect x="2030" y="632" width="292" height="226" rx="14" fill="#FFFFFF" stroke="#DAA654" stroke-dasharray="4 4" filter="url(#shadow)"/>
+  <use href="#icon-db" x="2054" y="660" width="36" height="36" color="#B66A00"/>
+  <text x="2103" y="680" class="card-title">PostgreSQL</text>
+  <text x="2054" y="714" class="card-sub">PostgreSQL hosted path</text>
+  <text x="2054" y="743" class="tiny">Psycopg 3</text>
+  <text x="2054" y="766" class="tiny">pre-ping + NullPool</text>
+  <text x="2054" y="789" class="tiny">durable production storage</text>
+  <rect x="2054" y="811" width="244" height="24" rx="12" fill="#F6E4C7"/><text x="2176" y="828" class="chip" text-anchor="middle">supported · deployment not verified</text>
+
+  <rect x="1736" y="888" width="586" height="102" rx="12" fill="#FFFFFF" stroke="#E2BE82"/>
+  <text x="1760" y="918" class="card-title">Alembic schema lifecycle</text>
+  <text x="1760" y="946" class="card-sub">Versioned migrations · controlled production upgrade</text>
+  <text x="1760" y="970" class="tiny">Development startup migration · no concurrent cold-start migration</text>
+
+  <rect x="1736" y="1018" width="586" height="112" rx="12" fill="#FFFFFF" stroke="#E2BE82"/>
+  <use href="#icon-file" x="1760" y="1044" width="30" height="30" color="#B66A00"/>
+  <text x="1803" y="1064" class="card-title">Synthetic CSV seed</text>
+  <text x="1760" y="1095" class="card-sub">Pandas validation → idempotent database provisioning</text>
+  <text x="1760" y="1117" class="tiny">Fictional portfolio records only</text>
+
+  <!-- Runtime relationships -->
+  <path d="M536 318 H436" fill="none" stroke="#2563EB" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <text x="480" y="306" class="relation" text-anchor="middle">assets</text>
+
+  <path d="M428 460 H476 V400 H980 V311 H992" fill="none" stroke="#2563EB" stroke-width="3" marker-start="url(#arrowBlue)" marker-end="url(#arrowBlue)"/>
+  <text x="730" y="393" class="relation" text-anchor="middle">REST · JSON · Bearer JWT</text>
+
+  <path d="M1310 382 V412" fill="none" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <path d="M1080 552 V582" fill="none" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <path d="M868 792 V828" fill="none" stroke="#16824B" stroke-width="2.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <path d="M1430 792 V828" fill="none" stroke="#B45309" stroke-width="2.5" marker-start="url(#arrowAmber)" marker-end="url(#arrowAmber)"/>
+
+  <path d="M1628 683 H1680 V526 H2040 V506" fill="none" stroke="#7C3AED" stroke-width="3" marker-start="url(#arrowViolet)" marker-end="url(#arrowViolet)"/>
+  <text x="1865" y="518" class="relation" text-anchor="middle">HTTPS · evidence / structured draft</text>
+
+  <path d="M1628 974 H1686 V744 H1734" fill="none" stroke="#B45309" stroke-width="3" marker-start="url(#arrowAmber)" marker-end="url(#arrowAmber)"/>
+  <circle cx="1686" cy="744" r="4" fill="#B45309"/>
+  <path d="M1686 744 V620 H2176 V630" fill="none" stroke="#D4993D" stroke-width="2.5" stroke-dasharray="3 5" marker-end="url(#arrowAmber)"/>
+
+  <path d="M452 807 H498" fill="none" stroke="#64748B" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+  <path d="M452 1080 H534" fill="none" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="492" y="1068" class="tiny" text-anchor="middle">calls</text>
+
+  <path d="M1870 888 V860" fill="none" stroke="#B45309" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrowAmber)"/>
+  <path d="M2160 888 V860" fill="none" stroke="#B45309" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrowAmber)"/>
+  <path d="M2322 1074 H2336 V870 H2250 V860" fill="none" stroke="#B45309" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrowAmber)"/>
+
+  <!-- Build and verification plane -->
+  <rect x="52" y="1212" width="2296" height="326" rx="18" fill="#FFFFFF" stroke="#3B827B" stroke-width="2"/>
+  <rect x="52" y="1212" width="2296" height="54" rx="18" fill="#155E59"/>
+  <rect x="52" y="1242" width="2296" height="24" fill="#155E59"/>
+  <use href="#icon-git" x="76" y="1225" width="28" height="28" color="#FFFFFF"/>
+  <text x="117" y="1246" font-size="20" font-weight="700" fill="#FFFFFF">BUILD AND VERIFICATION PLANE</text>
+  <text x="2320" y="1246" font-size="13" fill="#CBE7E4" text-anchor="end">separate from runtime</text>
+
+  <!-- Frontend lane -->
+  <text x="76" y="1301" class="chip">FRONTEND ARTIFACT</text>
+  <g>
+    <rect x="76" y="1320" width="220" height="72" rx="11" fill="#ECF7F5" stroke="#A8D8D3"/>
+    <text x="186" y="1349" class="card-title" text-anchor="middle">Git source</text>
+    <text x="186" y="1374" class="tiny" text-anchor="middle">reviewed branch</text>
+
+    <rect x="338" y="1320" width="220" height="72" rx="11" fill="#ECF7F5" stroke="#A8D8D3"/>
+    <text x="448" y="1349" class="card-title" text-anchor="middle">CI pipeline</text>
+    <text x="448" y="1374" class="tiny" text-anchor="middle">container runner</text>
+
+    <rect x="600" y="1320" width="250" height="72" rx="11" fill="#ECF7F5" stroke="#A8D8D3"/>
+    <text x="725" y="1349" class="card-title" text-anchor="middle">Locked install</text>
+    <text x="725" y="1374" class="tiny" text-anchor="middle">Node 20 · npm ci · lock file</text>
+
+    <rect x="892" y="1320" width="330" height="72" rx="11" fill="#ECF7F5" stroke="#A8D8D3"/>
+    <text x="1057" y="1349" class="card-title" text-anchor="middle">Verify + compile</text>
+    <text x="1057" y="1374" class="tiny" text-anchor="middle">tsc · ESLint · Vite · Vitest</text>
+
+    <rect x="1264" y="1320" width="260" height="72" rx="11" fill="#ECF7F5" stroke="#A8D8D3"/>
+    <use href="#icon-package" x="1286" y="1340" width="30" height="30" color="#155E59"/>
+    <text x="1408" y="1348" class="card-title" text-anchor="middle">Web artifact</text>
+    <text x="1408" y="1374" class="tiny" text-anchor="middle">hashed production assets</text>
+
+    <rect x="1566" y="1320" width="298" height="72" rx="11" fill="#ECF7F5" stroke="#A8D8D3"/>
+    <text x="1715" y="1349" class="card-title" text-anchor="middle">Application package</text>
+    <text x="1715" y="1374" class="tiny" text-anchor="middle">FastAPI + compiled SPA</text>
+  </g>
+  <g fill="none" stroke="#155E59" stroke-width="2.5" marker-end="url(#arrow)">
+    <path d="M296 1356 H330"/><path d="M558 1356 H592"/><path d="M850 1356 H884"/><path d="M1222 1356 H1256"/><path d="M1524 1356 H1558"/>
+  </g>
+
+  <!-- Backend verification lane -->
+  <text x="76" y="1440" class="chip">BACKEND QUALITY GATES</text>
+  <rect x="76" y="1455" width="1788" height="54" rx="10" fill="#F2F5F8" stroke="#D5DDE8"/>
+  <text x="102" y="1487" class="card-sub">pytest</text>
+  <circle cx="180" cy="1482" r="3" fill="#94A3B8"/>
+  <text x="202" y="1487" class="card-sub">Ruff</text>
+  <circle cx="276" cy="1482" r="3" fill="#94A3B8"/>
+  <text x="298" y="1487" class="card-sub">Black</text>
+  <circle cx="386" cy="1482" r="3" fill="#94A3B8"/>
+  <text x="408" y="1487" class="card-sub">route authorisation audit</text>
+  <circle cx="590" cy="1482" r="3" fill="#94A3B8"/>
+  <text x="612" y="1487" class="card-sub">migration chain</text>
+  <circle cx="756" cy="1482" r="3" fill="#94A3B8"/>
+  <text x="778" y="1487" class="card-sub">authenticated smoke journey</text>
+  <circle cx="1016" cy="1482" r="3" fill="#94A3B8"/>
+  <text x="1038" y="1487" class="card-sub">fake AI transport</text>
+  <circle cx="1206" cy="1482" r="3" fill="#94A3B8"/>
+  <text x="1228" y="1487" class="card-sub">throwaway databases</text>
+
+  <rect x="1904" y="1320" width="418" height="189" rx="12" fill="#F8FAFC" stroke="#CCD5E1"/>
+  <text x="1928" y="1350" class="card-title">Deployment modes</text>
+  <text x="1928" y="1384" class="chip">LOCAL — VERIFIED</text>
+  <text x="1928" y="1405" class="tiny">Uvicorn + FastAPI + compiled SPA + SQLite</text>
+  <line x1="1928" y1="1424" x2="2298" y2="1424" stroke="#E2E8F0"/>
+  <text x="1928" y="1454" class="chip">HOSTED — PREPARED PATH</text>
+  <text x="1928" y="1475" class="tiny">Python web runtime + PostgreSQL + env secrets</text>
+  <text x="1928" y="1497" class="tiny">No live production deployment claimed</text>
+
+  <path d="M1715 1320 V1190 H1642 V1132" fill="none" stroke="#155E59" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+  <text x="1570" y="1184" class="relation" text-anchor="end">artifact installed</text>
+
+  <text x="52" y="1558" font-size="12.5" fill="#64748B">Logical components, not microservices · HTTP locally; HTTPS for hosted ingress · SQLite verified locally · PostgreSQL deployment not verified.</text>
+  <text x="52" y="1582" font-size="12.5" fill="#64748B">AI-generated decision-support draft; human review required.</text>
+  <text x="2348" y="1582" font-size="12.5" fill="#64748B" text-anchor="end">Synthetic data only</text>
+</svg>

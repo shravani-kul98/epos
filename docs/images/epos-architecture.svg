@@ -1,0 +1,391 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2760" width="2200" height="2760" font-family="Segoe UI, Inter, Helvetica Neue, Arial, sans-serif">
+  <title>EPOS application architecture</title>
+  <desc>End-to-end architecture of the EPOS engineering portfolio intelligence prototype: React and TypeScript single-page application, FastAPI REST API, security layer, service adapters, deterministic Python engines, SQLModel persistence over SQLite or PostgreSQL, governed AI explanation layer, and the CI build and quality pipeline.</desc>
+
+  <defs>
+    <style>
+      rect[fill="#0EA5E9"] { fill: #0369A1; }
+      rect[fill="#0891B2"] { fill: #0E7490; }
+      rect[fill="#059669"] { fill: #047857; }
+      rect[fill="#D97706"] { fill: #B45309; }
+    </style>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F8FAFF"/>
+      <stop offset="100%" stop-color="#EDF1F8"/>
+    </linearGradient>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#334155"/>
+    </marker>
+    <marker id="arrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7C8AA0"/>
+    </marker>
+
+    <g id="ico" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <symbol id="i-users" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></g></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></g></symbol>
+    <symbol id="i-transfer" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="M16 21l4-4-4-4"/><path d="M20 17H4"/></g></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 6h.01"/><path d="M6 18h.01"/></g></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></g></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></g></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2"/><path d="M15 2v2"/><path d="M9 20v2"/><path d="M15 20v2"/><path d="M2 9h2"/><path d="M2 15h2"/><path d="M20 9h2"/><path d="M20 15h2"/></g></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></g></symbol>
+    <symbol id="i-git" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v12"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></g></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3 21 2"/><path d="M18 5l3 3"/><path d="M15 8l3 3"/></g></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 19a4.5 4.5 0 0 1 0-9 6 6 0 0 1 11.4 1.5A4 4 0 0 1 17.5 19z"/></g></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M9 11h3"/></g></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></g></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></g></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></g></symbol>
+    <symbol id="i-package" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v8l-9 5-9-5V8l9-5z"/><path d="M3.3 7 12 12l8.7-5"/><path d="M12 12v10"/></g></symbol>
+    <symbol id="i-history" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></g></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M19 15l.7 1.8 1.8.7-1.8.7L19 20l-.7-1.8-1.8-.7 1.8-.7z"/></g></symbol>
+  </defs>
+
+  <rect width="2200" height="2760" fill="url(#bg)"/>
+
+  <!-- ============================ HEADER ============================ -->
+  <rect x="60" y="40" width="2080" height="110" rx="18" fill="#0F172A"/>
+  <text x="100" y="90" font-size="38" font-weight="700" fill="#FFFFFF">EPOS — Engineering Portfolio Operating System</text>
+  <text x="100" y="124" font-size="18" fill="#CBD5E1">System overview · browser, API, governed analytics, databases and optional AI</text>
+  <rect x="1560" y="58" width="540" height="74" rx="37" fill="#1E293B" stroke="#334155" stroke-width="1.5"/>
+  <text x="1830" y="88" font-size="16" font-weight="600" fill="#E2E8F0" text-anchor="middle">Deterministic Python calculates facts</text>
+  <text x="1830" y="112" font-size="15" fill="#94A3B8" text-anchor="middle">AI explains evidence · humans approve</text>
+
+  <!-- ============================ LEFT PANEL ============================ -->
+
+  <!-- L1 How to read -->
+  <rect x="60" y="200" width="460" height="150" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="60" y="200" width="460" height="52" rx="18" fill="#334155"/><rect x="60" y="226" width="460" height="26" fill="#334155"/>
+  <use href="#i-info" x="82" y="212" width="28" height="28" color="#FFFFFF"/>
+  <text x="122" y="234" font-size="21" font-weight="700" fill="#FFFFFF">How to read this</text>
+  <text x="84" y="286" font-size="13.5" fill="#334155">▼ Down arrows = a request travelling inward</text>
+  <text x="84" y="310" font-size="13.5" fill="#334155">▲ Up arrows = the validated response returning</text>
+  <text x="84" y="334" font-size="13.5" fill="#334155">Dashed = configuration, build or reference input</text>
+
+  <!-- L2 Design principles -->
+  <rect x="60" y="400" width="460" height="290" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="60" y="400" width="460" height="52" rx="18" fill="#334155"/><rect x="60" y="426" width="460" height="26" fill="#334155"/>
+  <use href="#i-check" x="82" y="412" width="28" height="28" color="#FFFFFF"/>
+  <text x="122" y="434" font-size="21" font-weight="700" fill="#FFFFFF">Design principles</text>
+  <rect x="84" y="470" width="412" height="46" rx="10" fill="#F1F4F8" stroke="#DCE3EC"/><text x="102" y="498" font-size="13.5" fill="#0F172A">Deterministic Python calculates every fact</text>
+  <rect x="84" y="526" width="412" height="46" rx="10" fill="#F1F4F8" stroke="#DCE3EC"/><text x="102" y="554" font-size="13.5" fill="#0F172A">AI only explains already-validated evidence</text>
+  <rect x="84" y="582" width="412" height="46" rx="10" fill="#F1F4F8" stroke="#DCE3EC"/><text x="102" y="610" font-size="13.5" fill="#0F172A">The server enforces access, never hidden UI</text>
+  <rect x="84" y="638" width="412" height="46" rx="10" fill="#F1F4F8" stroke="#DCE3EC"/><text x="102" y="666" font-size="13.5" fill="#0F172A">Synthetic data · no enterprise data connectors</text>
+
+  <!-- L3 Configuration and secrets -->
+  <rect x="60" y="860" width="460" height="300" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="60" y="860" width="460" height="52" rx="18" fill="#475569"/><rect x="60" y="886" width="460" height="26" fill="#475569"/>
+  <use href="#i-key" x="82" y="872" width="28" height="28" color="#FFFFFF"/>
+  <text x="122" y="894" font-size="21" font-weight="700" fill="#FFFFFF">Runtime Configuration</text>
+  <rect x="84" y="930" width="412" height="42" rx="10" fill="#F1F5F9" stroke="#DBE3EC"/><text x="102" y="956" font-size="13" fill="#0F172A">Managed Database Connection String</text>
+  <rect x="84" y="980" width="412" height="42" rx="10" fill="#F1F5F9" stroke="#DBE3EC"/><text x="102" y="1006" font-size="13" fill="#0F172A">Cryptographic Session Signing Secret</text>
+  <rect x="84" y="1030" width="412" height="42" rx="10" fill="#F1F5F9" stroke="#DBE3EC"/><text x="102" y="1056" font-size="13" fill="#0F172A">Environment Mode: Development / Production</text>
+  <rect x="84" y="1080" width="412" height="42" rx="10" fill="#F1F5F9" stroke="#DBE3EC"/><text x="102" y="1106" font-size="13" fill="#0F172A">Azure OpenAI API Key &amp; Endpoint</text>
+  <text x="84" y="1143" font-size="12.5" font-style="italic" fill="#64748B">Injected as environment secrets · never exposed to client</text>
+
+  <!-- L4 Failure behaviour -->
+  <rect x="60" y="1200" width="460" height="230" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="60" y="1200" width="460" height="52" rx="18" fill="#475569"/><rect x="60" y="1226" width="460" height="26" fill="#475569"/>
+  <use href="#i-alert" x="82" y="1212" width="28" height="28" color="#FFFFFF"/>
+  <text x="122" y="1234" font-size="21" font-weight="700" fill="#FFFFFF">Degradation behaviour</text>
+  <rect x="84" y="1270" width="412" height="42" rx="10" fill="#F1F5F9" stroke="#DBE3EC"/><text x="102" y="1296" font-size="13" fill="#0F172A">AI unavailable → all calculations still work</text>
+  <rect x="84" y="1320" width="412" height="42" rx="10" fill="#F1F5F9" stroke="#DBE3EC"/><text x="102" y="1346" font-size="13" fill="#0F172A">Malformed AI reply → rejected safely</text>
+  <rect x="84" y="1370" width="412" height="42" rx="10" fill="#F1F5F9" stroke="#DBE3EC"/><text x="102" y="1396" font-size="13" fill="#0F172A">API unreachable → explicit error state in UI</text>
+
+  <!-- L5 Product language -->
+  <rect x="60" y="1470" width="460" height="240" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="60" y="1470" width="460" height="52" rx="18" fill="#0E7490"/><rect x="60" y="1496" width="460" height="26" fill="#0E7490"/>
+  <use href="#i-file" x="82" y="1482" width="28" height="28" color="#FFFFFF"/>
+  <text x="122" y="1504" font-size="21" font-weight="700" fill="#FFFFFF">Product language</text>
+  <rect x="84" y="1540" width="412" height="42" rx="10" fill="#E6F6FA" stroke="#C2E8F1"/><text x="102" y="1566" font-size="13" fill="#0F172A">Internal factor keys never reach the screen</text>
+  <rect x="84" y="1590" width="412" height="42" rx="10" fill="#E6F6FA" stroke="#C2E8F1"/><text x="102" y="1616" font-size="13" fill="#0F172A">Every result carries its source record IDs</text>
+  <rect x="84" y="1640" width="412" height="42" rx="10" fill="#E6F6FA" stroke="#C2E8F1"/><text x="102" y="1666" font-size="13" fill="#0F172A">The analysis reference date is always shown</text>
+
+  <!-- L6 Legacy interface -->
+  <rect x="60" y="1750" width="460" height="300" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="60" y="1750" width="460" height="52" rx="18" fill="#64748B"/><rect x="60" y="1776" width="460" height="26" fill="#64748B"/>
+  <use href="#i-monitor" x="82" y="1762" width="28" height="28" color="#FFFFFF"/>
+  <text x="122" y="1784" font-size="21" font-weight="700" fill="#FFFFFF">Legacy interface</text>
+  <rect x="84" y="1820" width="412" height="42" rx="10" fill="#F1F4F8" stroke="#DCE3EC"/><text x="102" y="1846" font-size="13" fill="#0F172A">Streamlit pages (EPOS Lite prototype)</text>
+  <rect x="84" y="1870" width="412" height="42" rx="10" fill="#F1F4F8" stroke="#DCE3EC"/><text x="102" y="1896" font-size="13" fill="#0F172A">Plotly charts, presentation only</text>
+  <rect x="84" y="1920" width="412" height="42" rx="10" fill="#F1F4F8" stroke="#DCE3EC"/><text x="102" y="1946" font-size="13" fill="#0F172A">Reads the same deterministic engines</text>
+  <text x="84" y="1990" font-size="12.5" font-style="italic" fill="#64748B">Kept runnable for continuity; excluded from the</text>
+  <text x="84" y="2012" font-size="12.5" font-style="italic" fill="#64748B">packaged deployment, which serves React only.</text>
+
+  <!-- L7 Source data -->
+  <rect x="60" y="2090" width="460" height="320" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="60" y="2090" width="460" height="52" rx="18" fill="#92400E"/><rect x="60" y="2116" width="460" height="26" fill="#92400E"/>
+  <use href="#i-file" x="82" y="2102" width="28" height="28" color="#FFFFFF"/>
+  <text x="122" y="2124" font-size="21" font-weight="700" fill="#FFFFFF">Synthetic source data</text>
+  <rect x="84" y="2160" width="412" height="42" rx="10" fill="#FDF2E3" stroke="#F7DFB8"/><text x="102" y="2186" font-size="13" fill="#0F172A">Validated synthetic CSV portfolio</text>
+  <rect x="84" y="2210" width="412" height="42" rx="10" fill="#FDF2E3" stroke="#F7DFB8"/><text x="102" y="2236" font-size="13" fill="#0F172A">Pandas loading with explicit validation</text>
+  <rect x="84" y="2260" width="412" height="42" rx="10" fill="#FDF2E3" stroke="#F7DFB8"/><text x="102" y="2286" font-size="13" fill="#0F172A">Idempotent seeding into the database</text>
+  <text x="84" y="2330" font-size="12.5" font-style="italic" fill="#64748B">Fictional projects, people and records only. No real</text>
+  <text x="84" y="2352" font-size="12.5" font-style="italic" fill="#64748B">customer, employee or employer data is present.</text>
+
+  <!-- ============================ MAIN SPINE ============================ -->
+
+  <!-- 1 People -->
+  <rect x="560" y="200" width="1060" height="150" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="560" y="200" width="1060" height="52" rx="18" fill="#7C3AED"/><rect x="560" y="226" width="1060" height="26" fill="#7C3AED"/>
+  <use href="#i-users" x="582" y="212" width="28" height="28" color="#FFFFFF"/>
+  <text x="622" y="234" font-size="22" font-weight="700" fill="#FFFFFF">1 · People using EPOS</text>
+  <text x="1598" y="234" font-size="14" fill="#E4D8FD" text-anchor="end">Browser access · backend credentials stay private</text>
+  <rect x="584" y="272" width="238" height="62" rx="12" fill="#F3EEFF" stroke="#DDD0FB"/><text x="602" y="298" font-size="15.5" font-weight="600" fill="#0F172A">Executive &amp; PMO</text><text x="602" y="318" font-size="12.5" fill="#475569">Portfolio-wide read access</text>
+  <rect x="842" y="272" width="238" height="62" rx="12" fill="#F3EEFF" stroke="#DDD0FB"/><text x="860" y="298" font-size="15.5" font-weight="600" fill="#0F172A">Project Manager</text><text x="860" y="318" font-size="12.5" fill="#475569">Plan, change and decide</text>
+  <rect x="1100" y="272" width="238" height="62" rx="12" fill="#F3EEFF" stroke="#DDD0FB"/><text x="1118" y="298" font-size="15.5" font-weight="600" fill="#0F172A">Engineer &amp; Lead</text><text x="1118" y="318" font-size="12.5" fill="#475569">Assigned project work</text>
+  <rect x="1358" y="272" width="238" height="62" rx="12" fill="#F3EEFF" stroke="#DDD0FB"/><text x="1376" y="298" font-size="15.5" font-weight="600" fill="#0F172A">Administrator</text><text x="1376" y="318" font-size="12.5" fill="#475569">Users, roles and access</text>
+
+  <!-- 2 Presentation -->
+  <rect x="560" y="400" width="1060" height="290" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="560" y="400" width="1060" height="52" rx="18" fill="#0EA5E9"/><rect x="560" y="426" width="1060" height="26" fill="#0EA5E9"/>
+  <use href="#i-monitor" x="582" y="412" width="28" height="28" color="#FFFFFF"/>
+  <text x="622" y="434" font-size="22" font-weight="700" fill="#FFFFFF">2 · Browser application</text>
+  <text x="1598" y="434" font-size="14" fill="#DBF1FD" text-anchor="end">React · TypeScript · Vite</text>
+  <rect x="584" y="470" width="238" height="62" rx="12" fill="#E8F6FE" stroke="#C6E8FA"/><text x="602" y="496" font-size="15.5" font-weight="600" fill="#0F172A">React 18</text><text x="602" y="516" font-size="12.5" fill="#475569">Component-based interface</text>
+  <rect x="842" y="470" width="238" height="62" rx="12" fill="#E8F6FE" stroke="#C6E8FA"/><text x="860" y="496" font-size="15.5" font-weight="600" fill="#0F172A">TypeScript 5.5</text><text x="860" y="516" font-size="12.5" fill="#475569">Strict compile-time contracts</text>
+  <rect x="1100" y="470" width="238" height="62" rx="12" fill="#E8F6FE" stroke="#C6E8FA"/><text x="1118" y="496" font-size="15.5" font-weight="600" fill="#0F172A">React Router 6</text><text x="1118" y="516" font-size="12.5" fill="#475569">Client-side page routing</text>
+  <rect x="1358" y="470" width="238" height="62" rx="12" fill="#E8F6FE" stroke="#C6E8FA"/><text x="1376" y="496" font-size="15.5" font-weight="600" fill="#0F172A">TanStack Query 5</text><text x="1376" y="516" font-size="12.5" fill="#475569">Server-state cache, refetch</text>
+  <rect x="584" y="548" width="238" height="62" rx="12" fill="#E8F6FE" stroke="#C6E8FA"/><text x="602" y="574" font-size="15.5" font-weight="600" fill="#0F172A">Tailwind CSS</text><text x="602" y="594" font-size="12.5" fill="#475569">Design tokens, responsive</text>
+  <rect x="842" y="548" width="238" height="62" rx="12" fill="#E8F6FE" stroke="#C6E8FA"/><text x="860" y="574" font-size="15.5" font-weight="600" fill="#0F172A">Recharts</text><text x="860" y="594" font-size="12.5" fill="#475569">Charts with table fallback</text>
+  <rect x="1100" y="548" width="238" height="62" rx="12" fill="#E8F6FE" stroke="#C6E8FA"/><text x="1118" y="574" font-size="15.5" font-weight="600" fill="#0F172A">Hook Form + Zod</text><text x="1118" y="594" font-size="12.5" fill="#475569">Validated user input</text>
+  <rect x="1358" y="548" width="238" height="62" rx="12" fill="#E8F6FE" stroke="#C6E8FA"/><text x="1376" y="574" font-size="15.5" font-weight="600" fill="#0F172A">Vite 5</text><text x="1376" y="594" font-size="12.5" fill="#475569">JavaScript and CSS bundling</text>
+  <rect x="584" y="626" width="1012" height="46" rx="12" fill="#F0F9FF" stroke="#C6E8FA"/>
+  <text x="602" y="654" font-size="13.5" fill="#0F172A">Renders API responses only — no scoring, risk or forecast logic runs in the browser, and no database URL, signing key or AI key ever reaches the client.</text>
+
+  <!-- 3 Transport -->
+  <rect x="560" y="730" width="1060" height="90" rx="18" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2" filter="url(#sh)"/>
+  <use href="#i-transfer" x="584" y="762" width="26" height="26" color="#334155"/>
+  <text x="620" y="783" font-size="19" font-weight="700" fill="#334155">3 · Transport</text>
+  <rect x="800" y="752" width="252" height="46" rx="12" fill="#F1F5F9" stroke="#DBE3EC"/><text x="926" y="780" font-size="13" fill="#0F172A" text-anchor="middle">HTTP locally · HTTPS when hosted</text>
+  <rect x="1072" y="752" width="252" height="46" rx="12" fill="#F1F5F9" stroke="#DBE3EC"/><text x="1198" y="780" font-size="13" fill="#0F172A" text-anchor="middle">Authorization: Bearer JWT</text>
+  <rect x="1344" y="752" width="252" height="46" rx="12" fill="#F1F5F9" stroke="#DBE3EC"/><text x="1470" y="780" font-size="13" fill="#0F172A" text-anchor="middle">JSON · same-origin browser and API</text>
+
+  <!-- 4 API -->
+  <rect x="560" y="860" width="1060" height="300" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="560" y="860" width="1060" height="52" rx="18" fill="#2563EB"/><rect x="560" y="886" width="1060" height="26" fill="#2563EB"/>
+  <use href="#i-server" x="582" y="872" width="28" height="28" color="#FFFFFF"/>
+  <text x="622" y="894" font-size="22" font-weight="700" fill="#FFFFFF">4 · Application API</text>
+  <text x="1598" y="894" font-size="14" fill="#D8E4FE" text-anchor="end">FastAPI · Pydantic · Uvicorn</text>
+  <rect x="584" y="930" width="324" height="62" rx="12" fill="#EAF0FE" stroke="#CBDAFB"/><text x="602" y="956" font-size="15.5" font-weight="600" fill="#0F172A">REST API Endpoint Routers</text><text x="602" y="976" font-size="12.5" fill="#475569">Projects, risks, stage gates, scenarios, copilot</text>
+  <rect x="928" y="930" width="324" height="62" rx="12" fill="#EAF0FE" stroke="#CBDAFB"/><text x="946" y="956" font-size="15.5" font-weight="600" fill="#0F172A">Data contracts and schemas</text><text x="946" y="976" font-size="12.5" fill="#475569">Pydantic request and response validation</text>
+  <rect x="1272" y="930" width="324" height="62" rx="12" fill="#EAF0FE" stroke="#CBDAFB"/><text x="1290" y="956" font-size="15.5" font-weight="600" fill="#0F172A">Static Web Asset Server</text><text x="1290" y="976" font-size="12.5" fill="#475569">Serves compiled client bundle &amp; UI assets</text>
+  <rect x="584" y="1008" width="324" height="62" rx="12" fill="#EAF0FE" stroke="#CBDAFB"/><text x="602" y="1034" font-size="15.5" font-weight="600" fill="#0F172A">Centralized Error Handlers</text><text x="602" y="1054" font-size="12.5" fill="#475569">Optimistic lock conflicts (409) &amp; validation (422)</text>
+  <rect x="928" y="1008" width="324" height="62" rx="12" fill="#EAF0FE" stroke="#CBDAFB"/><text x="946" y="1034" font-size="15.5" font-weight="600" fill="#0F172A">System Health &amp; Probes</text><text x="946" y="1054" font-size="12.5" fill="#475569">Liveness checks without credential disclosure</text>
+  <rect x="1272" y="1008" width="324" height="62" rx="12" fill="#EAF0FE" stroke="#CBDAFB"/><text x="1290" y="1034" font-size="15.5" font-weight="600" fill="#0F172A">API Contract &amp; Documentation</text><text x="1290" y="1054" font-size="12.5" fill="#475569">OpenAPI standard; disabled publicly in production</text>
+  <rect x="584" y="1086" width="1012" height="46" rx="12" fill="#F4F8FF" stroke="#CBDAFB"/>
+  <text x="602" y="1114" font-size="13.5" fill="#0F172A">Routers never calculate business results — every scored answer is delegated to the service layer and the deterministic engines.</text>
+
+  <!-- 5 Security -->
+  <rect x="560" y="1200" width="1060" height="230" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="560" y="1200" width="1060" height="52" rx="18" fill="#DC2626"/><rect x="560" y="1226" width="1060" height="26" fill="#DC2626"/>
+  <use href="#i-shield" x="582" y="1212" width="28" height="28" color="#FFFFFF"/>
+  <text x="622" y="1234" font-size="22" font-weight="700" fill="#FFFFFF">5 · Identity, access and governed writes</text>
+  <text x="1598" y="1234" font-size="14" fill="#FBD9D9" text-anchor="end">Identity · permissions · auditability</text>
+  <rect x="584" y="1270" width="238" height="62" rx="12" fill="#FDECEC" stroke="#F8CFCF"/><text x="602" y="1296" font-size="15.5" font-weight="600" fill="#0F172A">Secure Password Storage</text><text x="602" y="1316" font-size="12.5" fill="#475569">Argon2id; no plain-text password</text>
+  <rect x="842" y="1270" width="238" height="62" rx="12" fill="#FDECEC" stroke="#F8CFCF"/><text x="860" y="1296" font-size="15.5" font-weight="600" fill="#0F172A">Expiring User Sessions</text><text x="860" y="1316" font-size="12.5" fill="#475569">Signed JWT; one-hour lifetime</text>
+  <rect x="1100" y="1270" width="238" height="62" rx="12" fill="#FDECEC" stroke="#F8CFCF"/><text x="1118" y="1296" font-size="15.5" font-weight="600" fill="#0F172A">User re-read per call</text><text x="1118" y="1316" font-size="12.5" fill="#475569">Role changes apply at once</text>
+  <rect x="1358" y="1270" width="238" height="62" rx="12" fill="#FDECEC" stroke="#F8CFCF"/><text x="1376" y="1296" font-size="15.5" font-weight="600" fill="#0F172A">7 roles → permissions</text><text x="1376" y="1316" font-size="12.5" fill="#475569">Checked by route dependency</text>
+  <rect x="584" y="1348" width="238" height="62" rx="12" fill="#FDECEC" stroke="#F8CFCF"/><text x="602" y="1374" font-size="15.5" font-weight="600" fill="#0F172A">Project membership</text><text x="602" y="1394" font-size="12.5" fill="#475569">Out-of-scope record → 404</text>
+  <rect x="842" y="1348" width="238" height="62" rx="12" fill="#FDECEC" stroke="#F8CFCF"/><text x="860" y="1374" font-size="15.5" font-weight="600" fill="#0F172A">Row versioning</text><text x="860" y="1394" font-size="12.5" fill="#475569">Stale edit rejected with 409</text>
+  <rect x="1100" y="1348" width="238" height="62" rx="12" fill="#FDECEC" stroke="#F8CFCF"/><text x="1118" y="1374" font-size="15.5" font-weight="600" fill="#0F172A">Audit trail</text><text x="1118" y="1394" font-size="12.5" fill="#475569">Governed record changes logged</text>
+  <rect x="1358" y="1348" width="238" height="62" rx="12" fill="#FDECEC" stroke="#F8CFCF"/><text x="1376" y="1374" font-size="15.5" font-weight="600" fill="#0F172A">Production safeguards</text><text x="1376" y="1394" font-size="12.5" fill="#475569">Missing / weak key → no token</text>
+
+  <!-- 6 Services -->
+  <rect x="560" y="1470" width="1060" height="240" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="560" y="1470" width="1060" height="52" rx="18" fill="#0891B2"/><rect x="560" y="1496" width="1060" height="26" fill="#0891B2"/>
+  <use href="#i-layers" x="582" y="1482" width="28" height="28" color="#FFFFFF"/>
+  <text x="622" y="1504" font-size="22" font-weight="700" fill="#FFFFFF">6 · Application services</text>
+  <text x="1598" y="1504" font-size="14" fill="#D6F0F8" text-anchor="end">Data adaptation · orchestration · terminology</text>
+  <rect x="584" y="1540" width="324" height="62" rx="12" fill="#E6F6FA" stroke="#C2E8F1"/><text x="602" y="1566" font-size="15.5" font-weight="600" fill="#0F172A">Portfolio Data Adapter</text><text x="602" y="1586" font-size="12.5" fill="#475569">Converts database rows into engine inputs</text>
+  <rect x="928" y="1540" width="324" height="62" rx="12" fill="#E6F6FA" stroke="#C2E8F1"/><text x="946" y="1566" font-size="15.5" font-weight="600" fill="#0F172A">Portfolio Analytics Service</text><text x="946" y="1586" font-size="12.5" fill="#475569">Coordinates engines &amp; builds executive views</text>
+  <rect x="1272" y="1540" width="324" height="62" rx="12" fill="#E6F6FA" stroke="#C2E8F1"/><text x="1290" y="1566" font-size="15.5" font-weight="600" fill="#0F172A">Business Terminology Mapping</text><text x="1290" y="1586" font-size="12.5" fill="#475569">Translates internal factor keys to display labels</text>
+  <rect x="584" y="1618" width="324" height="62" rx="12" fill="#E6F6FA" stroke="#C2E8F1"/><text x="602" y="1644" font-size="15.5" font-weight="600" fill="#0F172A">Natural-language routing</text><text x="602" y="1664" font-size="12.5" fill="#475569">Classifies user intent and validates entity IDs</text>
+  <rect x="928" y="1618" width="324" height="62" rx="12" fill="#E6F6FA" stroke="#C2E8F1"/><text x="946" y="1644" font-size="15.5" font-weight="600" fill="#0F172A">Platform and audit services</text><text x="946" y="1664" font-size="12.5" fill="#475569">Authorised search, activity log and user admin</text>
+  <rect x="1272" y="1618" width="324" height="62" rx="12" fill="#E6F6FA" stroke="#C2E8F1"/><text x="1290" y="1644" font-size="15.5" font-weight="600" fill="#0F172A">Project Scope &amp; Privacy Filter</text><text x="1290" y="1664" font-size="12.5" fill="#475569">Excludes unauthorized &amp; soft-deleted records</text>
+
+  <!-- 7 Engines -->
+  <rect x="560" y="1750" width="1060" height="300" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="560" y="1750" width="1060" height="52" rx="18" fill="#059669"/><rect x="560" y="1776" width="1060" height="26" fill="#059669"/>
+  <use href="#i-cpu" x="582" y="1762" width="28" height="28" color="#FFFFFF"/>
+  <text x="622" y="1784" font-size="22" font-weight="700" fill="#FFFFFF">7 · Deterministic calculation engines</text>
+  <text x="1598" y="1784" font-size="14" fill="#CDEEE0" text-anchor="end">Python · typed rules · source evidence</text>
+  <rect x="584" y="1820" width="324" height="62" rx="12" fill="#E7F6F0" stroke="#C3E9DA"/><text x="602" y="1846" font-size="15.5" font-weight="600" fill="#0F172A">Health engine</text><text x="602" y="1866" font-size="12.5" fill="#475569">7 weighted factors → 0–100 and band</text>
+  <rect x="928" y="1820" width="324" height="62" rx="12" fill="#E7F6F0" stroke="#C3E9DA"/><text x="946" y="1846" font-size="15.5" font-weight="600" fill="#0F172A">Confidence engine</text><text x="946" y="1866" font-size="12.5" fill="#475569">Freshness, completeness, ownership</text>
+  <rect x="1272" y="1820" width="324" height="62" rx="12" fill="#E7F6F0" stroke="#C3E9DA"/><text x="1290" y="1846" font-size="15.5" font-weight="600" fill="#0F172A">Risk early warning</text><text x="1290" y="1866" font-size="12.5" fill="#475569">8 rules, ordered by severity</text>
+  <rect x="584" y="1898" width="324" height="62" rx="12" fill="#E7F6F0" stroke="#C3E9DA"/><text x="602" y="1924" font-size="15.5" font-weight="600" fill="#0F172A">Change impact engine</text><text x="602" y="1944" font-size="12.5" fill="#475569">Affected records + documented heuristic</text>
+  <rect x="928" y="1898" width="324" height="62" rx="12" fill="#E7F6F0" stroke="#C3E9DA"/><text x="946" y="1924" font-size="15.5" font-weight="600" fill="#0F172A">Scenario engine</text><text x="946" y="1944" font-size="12.5" fill="#475569">Delay what-if that never mutates data</text>
+  <rect x="1272" y="1898" width="324" height="62" rx="12" fill="#E7F6F0" stroke="#C3E9DA"/><text x="1290" y="1924" font-size="15.5" font-weight="600" fill="#0F172A">Gate rules</text><text x="1290" y="1944" font-size="12.5" fill="#475569">Readiness from criteria and reviews</text>
+  <rect x="584" y="1976" width="1012" height="46" rx="12" fill="#F0FAF6" stroke="#C3E9DA"/>
+  <text x="602" y="2004" font-size="13.5" fill="#0F172A">Weights, bands and thresholds are centrally governed · results cite source records · every calculation uses an explicit analysis date and never writes data.</text>
+
+  <!-- 8 Persistence -->
+  <rect x="560" y="2090" width="1060" height="320" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="560" y="2090" width="1060" height="52" rx="18" fill="#D97706"/><rect x="560" y="2116" width="1060" height="26" fill="#D97706"/>
+  <use href="#i-database" x="582" y="2102" width="28" height="28" color="#FFFFFF"/>
+  <text x="622" y="2124" font-size="22" font-weight="700" fill="#FFFFFF">8 · Relational persistence</text>
+  <text x="1598" y="2124" font-size="14" fill="#FBE7C9" text-anchor="end">SQLModel · SQLAlchemy</text>
+  <rect x="584" y="2160" width="324" height="62" rx="12" fill="#FDF2E3" stroke="#F7DFB8"/><text x="602" y="2186" font-size="15.5" font-weight="600" fill="#0F172A">Relational ORM Models</text><text x="602" y="2206" font-size="12.5" fill="#475569">Type-safe Python models define table schema</text>
+  <rect x="928" y="2160" width="324" height="62" rx="12" fill="#FDF2E3" stroke="#F7DFB8"/><text x="946" y="2186" font-size="15.5" font-weight="600" fill="#0F172A">SQL engine and sessions</text><text x="946" y="2206" font-size="12.5" fill="#475569">Dialect-aware connections and transactions</text>
+  <rect x="1272" y="2160" width="324" height="62" rx="12" fill="#FDF2E3" stroke="#F7DFB8"/><text x="1290" y="2186" font-size="15.5" font-weight="600" fill="#0F172A">Parameterised ORM queries</text><text x="1290" y="2206" font-size="12.5" fill="#475569">Bound parameters separate SQL from values</text>
+  <rect x="584" y="2238" width="496" height="90" rx="12" fill="#FFF7EC" stroke="#F7DFB8"/>
+  <text x="602" y="2264" font-size="15.5" font-weight="600" fill="#0F172A">SQLite Database — Local Development</text>
+  <text x="602" y="2284" font-size="12.5" fill="#475569">Zero-configuration embedded database file</text>
+  <text x="602" y="2302" font-size="12.5" fill="#475569">Foreign-key referential integrity enforced</text>
+  <text x="602" y="2320" font-size="12.5" fill="#475569">Automated tests run on isolated throwaway instances</text>
+  <rect x="1100" y="2238" width="496" height="90" rx="12" fill="#FFF7EC" stroke="#F7DFB8"/>
+  <text x="1118" y="2264" font-size="15.5" font-weight="600" fill="#0F172A">PostgreSQL — Hosted Database Path</text>
+  <text x="1118" y="2284" font-size="12.5" fill="#475569">Psycopg 3 relational database connectivity</text>
+  <text x="1118" y="2302" font-size="12.5" fill="#475569">Short-lived connections for serverless runtimes</text>
+  <text x="1118" y="2320" font-size="12.5" fill="#475569">Enforced durable storage in production mode</text>
+  <rect x="584" y="2344" width="1012" height="46" rx="12" fill="#FFFBF3" stroke="#F7DFB8"/>
+  <text x="602" y="2372" font-size="13.5" fill="#0F172A">Hosted mode requires PostgreSQL · production startup migrations are disabled by default and managed separately.</text>
+
+  <!-- ============================ RIGHT PANEL ============================ -->
+
+  <!-- R1 Roles -->
+  <rect x="1680" y="200" width="460" height="150" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="1680" y="200" width="460" height="52" rx="18" fill="#7C3AED"/><rect x="1680" y="226" width="460" height="26" fill="#7C3AED"/>
+  <use href="#i-users" x="1702" y="212" width="28" height="28" color="#FFFFFF"/>
+  <text x="1742" y="234" font-size="21" font-weight="700" fill="#FFFFFF">Roles → permissions</text>
+  <rect x="1704" y="262" width="412" height="76" rx="12" fill="#F3EEFF" stroke="#DDD0FB"/>
+  <text x="1722" y="286" font-size="13" fill="#0F172A">7 roles mapped to explicit permissions:</text>
+  <text x="1722" y="306" font-size="12.5" fill="#475569">Portfolio access · project updates · risk management</text>
+  <text x="1722" y="326" font-size="12.5" fill="#475569">Change decisions · scenario analysis · AI assistance</text>
+
+  <!-- R2 Product surfaces -->
+  <rect x="1680" y="400" width="460" height="290" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="1680" y="400" width="460" height="52" rx="18" fill="#0EA5E9"/><rect x="1680" y="426" width="460" height="26" fill="#0EA5E9"/>
+  <use href="#i-grid" x="1702" y="412" width="28" height="28" color="#FFFFFF"/>
+  <text x="1742" y="434" font-size="21" font-weight="700" fill="#FFFFFF">Product surfaces</text>
+  <rect x="1704" y="466" width="412" height="38" rx="10" fill="#E8F6FE" stroke="#C6E8FA"/><text x="1722" y="490" font-size="12.5" fill="#0F172A">Executive summary · Portfolio</text>
+  <rect x="1704" y="511" width="412" height="38" rx="10" fill="#E8F6FE" stroke="#C6E8FA"/><text x="1722" y="535" font-size="12.5" fill="#0F172A">Projects · My Work · Calendar</text>
+  <rect x="1704" y="556" width="412" height="38" rx="10" fill="#E8F6FE" stroke="#C6E8FA"/><text x="1722" y="580" font-size="12.5" fill="#0F172A">Project workspace with twelve tabs</text>
+  <rect x="1704" y="601" width="412" height="38" rx="10" fill="#E8F6FE" stroke="#C6E8FA"/><text x="1722" y="625" font-size="12.5" fill="#0F172A">Requirements · Risks · Issues · Changes</text>
+  <rect x="1704" y="646" width="412" height="38" rx="10" fill="#E8F6FE" stroke="#C6E8FA"/><text x="1722" y="670" font-size="12.5" fill="#0F172A">Scenarios · Ask EPOS · Report · Admin</text>
+
+  <!-- R3 Build artifact -->
+  <rect x="1680" y="860" width="460" height="300" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="1680" y="860" width="460" height="52" rx="18" fill="#0284C7"/><rect x="1680" y="886" width="460" height="26" fill="#0284C7"/>
+  <use href="#i-package" x="1702" y="872" width="28" height="28" color="#FFFFFF"/>
+  <text x="1742" y="894" font-size="21" font-weight="700" fill="#FFFFFF">Client Distribution Package</text>
+  <rect x="1704" y="930" width="412" height="42" rx="10" fill="#E8F6FE" stroke="#C6E8FA"/><text x="1722" y="956" font-size="13" fill="#0F172A">Pre-Compiled Client Web Application</text>
+  <rect x="1704" y="980" width="412" height="42" rx="10" fill="#E8F6FE" stroke="#C6E8FA"/><text x="1722" y="1006" font-size="13" fill="#0F172A">Content-Hashed Immutable Static Assets</text>
+  <rect x="1704" y="1030" width="412" height="42" rx="10" fill="#E8F6FE" stroke="#C6E8FA"/><text x="1722" y="1056" font-size="13" fill="#0F172A">Single-Page Navigation Deep-Link Support</text>
+  <text x="1704" y="1096" font-size="12.5" font-style="italic" fill="#64748B">Compiled by Vite · served directly by the API</text>
+  <text x="1704" y="1118" font-size="12.5" font-style="italic" fill="#64748B">by the API as a single unified service origin.</text>
+
+  <!-- R4 Governed write path -->
+  <rect x="1680" y="1200" width="460" height="230" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="1680" y="1200" width="460" height="52" rx="18" fill="#DC2626"/><rect x="1680" y="1226" width="460" height="26" fill="#DC2626"/>
+  <use href="#i-shield" x="1702" y="1212" width="28" height="28" color="#FFFFFF"/>
+  <text x="1742" y="1234" font-size="21" font-weight="700" fill="#FFFFFF">Governed write path</text>
+  <rect x="1704" y="1270" width="412" height="42" rx="10" fill="#FDECEC" stroke="#F8CFCF"/><text x="1722" y="1296" font-size="13" fill="#0F172A">1 · Validate payload, permission and scope</text>
+  <rect x="1704" y="1320" width="412" height="42" rx="10" fill="#FDECEC" stroke="#F8CFCF"/><text x="1722" y="1346" font-size="13" fill="#0F172A">2 · Check row version and record the audit event</text>
+  <rect x="1704" y="1370" width="412" height="42" rx="10" fill="#FDECEC" stroke="#F8CFCF"/><text x="1722" y="1396" font-size="13" fill="#0F172A">3 · Commit the governed transaction</text>
+
+  <!-- R5 Ask EPOS routing -->
+  <rect x="1680" y="1470" width="460" height="240" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="1680" y="1470" width="460" height="52" rx="18" fill="#9333EA"/><rect x="1680" y="1496" width="460" height="26" fill="#9333EA"/>
+  <use href="#i-sparkles" x="1702" y="1482" width="28" height="28" color="#FFFFFF"/>
+  <text x="1742" y="1504" font-size="21" font-weight="700" fill="#FFFFFF">AI Copilot Guardrails</text>
+  <rect x="1704" y="1540" width="412" height="42" rx="10" fill="#F5EBFE" stroke="#E6D2FB"/><text x="1722" y="1566" font-size="13" fill="#0F172A">Read-only guard · no record-write authority</text>
+  <rect x="1704" y="1590" width="412" height="42" rx="10" fill="#F5EBFE" stroke="#E6D2FB"/><text x="1722" y="1616" font-size="13" fill="#0F172A">Approved intents · validated entity selectors</text>
+  <rect x="1704" y="1640" width="412" height="42" rx="10" fill="#F5EBFE" stroke="#E6D2FB"/><text x="1722" y="1666" font-size="13" fill="#0F172A">Bounded evidence · deterministic calculations</text>
+
+  <!-- R6 AI service -->
+  <rect x="1680" y="1750" width="460" height="300" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="1680" y="1750" width="460" height="52" rx="18" fill="#7E22CE"/><rect x="1680" y="1776" width="460" height="26" fill="#7E22CE"/>
+  <use href="#i-cloud" x="1702" y="1762" width="28" height="28" color="#FFFFFF"/>
+  <text x="1742" y="1784" font-size="21" font-weight="700" fill="#FFFFFF">Azure OpenAI Service</text>
+  <text x="2118" y="1784" font-size="13" fill="#E9D5FF" text-anchor="end">HTTPS</text>
+  <rect x="1704" y="1820" width="412" height="42" rx="10" fill="#F5EBFE" stroke="#E6D2FB"/><text x="1722" y="1846" font-size="13" fill="#0F172A">Backend Server Authentication (Protected API Key)</text>
+  <rect x="1704" y="1870" width="412" height="42" rx="10" fill="#F5EBFE" stroke="#E6D2FB"/><text x="1722" y="1896" font-size="13" fill="#0F172A">Structured JSON · not deterministic model output</text>
+  <rect x="1704" y="1920" width="412" height="42" rx="10" fill="#F5EBFE" stroke="#E6D2FB"/><text x="1722" y="1946" font-size="13" fill="#0F172A">Source validation · unsupported IDs removed</text>
+  <text x="1704" y="1990" font-size="12.5" font-style="italic" fill="#64748B">Cannot write records, run SQL, calculate a score or</text>
+  <text x="1704" y="2012" font-size="12.5" font-style="italic" fill="#64748B">approve anything. Output is labelled a draft for</text>
+  <text x="1704" y="2034" font-size="12.5" font-style="italic" fill="#64748B">human review before any decision is taken.</text>
+
+  <!-- R7 Schema history -->
+  <rect x="1680" y="2090" width="460" height="320" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="1680" y="2090" width="460" height="52" rx="18" fill="#B45309"/><rect x="1680" y="2116" width="460" height="26" fill="#B45309"/>
+  <use href="#i-history" x="1702" y="2102" width="28" height="28" color="#FFFFFF"/>
+  <text x="1742" y="2124" font-size="21" font-weight="700" fill="#FFFFFF">Database schema lifecycle</text>
+  <rect x="1704" y="2160" width="412" height="42" rx="10" fill="#FDF2E3" stroke="#F7DFB8"/><text x="1722" y="2186" font-size="13" fill="#0F172A">Version-Controlled Database Migrations (Alembic)</text>
+  <rect x="1704" y="2210" width="412" height="42" rx="10" fill="#FDF2E3" stroke="#F7DFB8"/><text x="1722" y="2236" font-size="13" fill="#0F172A">Verified Schema Evolution &amp; Table Tracking</text>
+  <rect x="1704" y="2260" width="412" height="42" rx="10" fill="#FDF2E3" stroke="#F7DFB8"/><text x="1722" y="2286" font-size="13" fill="#0F172A">Idempotent DDL &amp; Synthetic Starter Data Scripts</text>
+  <text x="1704" y="2330" font-size="12.5" font-style="italic" fill="#64748B">Migrations run as a pre-deployment step, preventing</text>
+  <text x="1704" y="2352" font-size="12.5" font-style="italic" fill="#64748B">concurrent cloud instances from racing on schema locks.</text>
+
+  <!-- ============================ SPINE ARROWS ============================ -->
+  <g stroke="#334155" stroke-width="3" fill="none">
+    <path d="M1060 354 V392" marker-end="url(#arrow)"/><path d="M1120 396 V358" marker-end="url(#arrow)"/>
+    <path d="M1060 694 V722" marker-end="url(#arrow)"/><path d="M1120 726 V698" marker-end="url(#arrow)"/>
+    <path d="M1060 824 V852" marker-end="url(#arrow)"/><path d="M1120 856 V828" marker-end="url(#arrow)"/>
+    <path d="M1060 1164 V1192" marker-end="url(#arrow)"/><path d="M1120 1196 V1168" marker-end="url(#arrow)"/>
+    <path d="M1060 1434 V1462" marker-end="url(#arrow)"/><path d="M1120 1466 V1438" marker-end="url(#arrow)"/>
+    <path d="M1060 1714 V1742" marker-end="url(#arrow)"/><path d="M1120 1746 V1718" marker-end="url(#arrow)"/>
+    <path d="M1622 1692 H1646 V2070 H1540 V2088" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  </g>
+  <text x="1042" y="378" font-size="12.5" fill="#475569" text-anchor="end">request</text>
+  <text x="1138" y="378" font-size="12.5" fill="#475569">response</text>
+  <text x="610" y="2076" font-size="13" fill="#475569">Services access the database directly; calculation engines stay independent of storage.</text>
+
+  <!-- ============================ SIDE CONNECTORS ============================ -->
+  <g stroke="#7C8AA0" stroke-width="2.5" fill="none" stroke-dasharray="7 6">
+    <path d="M524 1010 H552" marker-end="url(#arrowMuted)"/>
+    <path d="M524 1900 H552" marker-end="url(#arrowMuted)"/>
+    <path d="M524 2250 H552" marker-end="url(#arrowMuted)"/>
+    <path d="M1676 1010 H1628" marker-end="url(#arrowMuted)"/>
+    <path d="M1676 2250 H1628" marker-end="url(#arrowMuted)"/>
+    <path d="M1624 275 H1672" marker-end="url(#arrowMuted)"/>
+    <path d="M1624 545 H1672" marker-end="url(#arrowMuted)"/>
+  </g>
+  <g stroke="#334155" stroke-width="3" fill="none">
+    <path d="M1624 1310 H1672" marker-end="url(#arrow)"/>
+    <path d="M1624 1590 H1672" marker-end="url(#arrow)"/>
+    <path d="M1940 1714 V1742" marker-end="url(#arrow)"/>
+    <path d="M2000 1746 V1718" marker-end="url(#arrow)"/>
+  </g>
+  <text x="1922" y="1736" font-size="12.5" fill="#475569" text-anchor="end">evidence ▼   ▲ draft</text>
+
+  <!-- ============================ BOTTOM BAND ============================ -->
+  <rect x="60" y="2460" width="2080" height="230" rx="18" fill="#FFFFFF" filter="url(#sh)"/>
+  <rect x="60" y="2460" width="2080" height="52" rx="18" fill="#0F766E"/><rect x="60" y="2486" width="2080" height="26" fill="#0F766E"/>
+  <use href="#i-git" x="82" y="2472" width="28" height="28" color="#FFFFFF"/>
+  <text x="122" y="2494" font-size="22" font-weight="700" fill="#FFFFFF">9 · Build, test and delivery</text>
+  <text x="2118" y="2494" font-size="14" fill="#CCE7E3" text-anchor="end">Git · Automated CI Runners · Locked Dependencies</text>
+
+  <rect x="84" y="2530" width="220" height="62" rx="12" fill="#E5F3F1" stroke="#C2E3DE"/><text x="194" y="2556" font-size="15" font-weight="600" fill="#0F172A" text-anchor="middle">Version Control</text><text x="194" y="2576" font-size="12.5" fill="#475569" text-anchor="middle">Reviewed Git branch push</text>
+  <rect x="342" y="2530" width="220" height="62" rx="12" fill="#E5F3F1" stroke="#C2E3DE"/><text x="452" y="2556" font-size="15" font-weight="600" fill="#0F172A" text-anchor="middle">CI Pipeline Trigger</text><text x="452" y="2576" font-size="12.5" fill="#475569" text-anchor="middle">Isolated container runner</text>
+  <rect x="600" y="2530" width="220" height="62" rx="12" fill="#E5F3F1" stroke="#C2E3DE"/><text x="710" y="2556" font-size="15" font-weight="600" fill="#0F172A" text-anchor="middle">Strict Install</text><text x="710" y="2576" font-size="12.5" fill="#475569" text-anchor="middle">Locked package versions</text>
+  <rect x="858" y="2530" width="220" height="62" rx="12" fill="#E5F3F1" stroke="#C2E3DE"/><text x="968" y="2556" font-size="15" font-weight="600" fill="#0F172A" text-anchor="middle">Type Verification</text><text x="968" y="2576" font-size="12.5" fill="#475569" text-anchor="middle">Strict TypeScript check</text>
+  <rect x="1116" y="2530" width="220" height="62" rx="12" fill="#E5F3F1" stroke="#C2E3DE"/><text x="1226" y="2556" font-size="15" font-weight="600" fill="#0F172A" text-anchor="middle">Code Quality</text><text x="1226" y="2576" font-size="12.5" fill="#475569" text-anchor="middle">Static lint &amp; syntax audit</text>
+  <rect x="1374" y="2530" width="220" height="62" rx="12" fill="#E5F3F1" stroke="#C2E3DE"/><text x="1484" y="2556" font-size="15" font-weight="600" fill="#0F172A" text-anchor="middle">Asset Bundling</text><text x="1484" y="2576" font-size="12.5" fill="#475569" text-anchor="middle">Optimized production build</text>
+  <rect x="1632" y="2530" width="220" height="62" rx="12" fill="#E5F3F1" stroke="#C2E3DE"/><text x="1742" y="2556" font-size="15" font-weight="600" fill="#0F172A" text-anchor="middle">Automated Tests</text><text x="1742" y="2576" font-size="12.5" fill="#475569" text-anchor="middle">Component regression suite</text>
+  <rect x="1890" y="2530" width="220" height="62" rx="12" fill="#E5F3F1" stroke="#C2E3DE"/><text x="2000" y="2556" font-size="15" font-weight="600" fill="#0F172A" text-anchor="middle">Release Artifact</text><text x="2000" y="2576" font-size="12.5" fill="#475569" text-anchor="middle">Deployable web package</text>
+
+  <g stroke="#0F766E" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M314 2554 l10 7 -10 7"/><path d="M572 2554 l10 7 -10 7"/><path d="M830 2554 l10 7 -10 7"/><path d="M1088 2554 l10 7 -10 7"/>
+    <path d="M1346 2554 l10 7 -10 7"/><path d="M1604 2554 l10 7 -10 7"/><path d="M1862 2554 l10 7 -10 7"/>
+  </g>
+
+  <rect x="84" y="2608" width="300" height="62" rx="12" fill="#F1F5F9" stroke="#DBE3EC"/><text x="234" y="2634" font-size="15" font-weight="600" fill="#0F172A" text-anchor="middle">Backend Automated Tests</text><text x="234" y="2654" font-size="12.5" fill="#475569" text-anchor="middle">Pytest unit, engine, API &amp; RBAC suite</text>
+  <rect x="430" y="2608" width="300" height="62" rx="12" fill="#F1F5F9" stroke="#DBE3EC"/><text x="580" y="2634" font-size="15" font-weight="600" fill="#0F172A" text-anchor="middle">Python Code Linter</text><text x="580" y="2654" font-size="12.5" fill="#475569" text-anchor="middle">Ruff syntax &amp; import consistency checks</text>
+  <rect x="776" y="2608" width="300" height="62" rx="12" fill="#F1F5F9" stroke="#DBE3EC"/><text x="926" y="2634" font-size="15" font-weight="600" fill="#0F172A" text-anchor="middle">Code Formatting Engine</text><text x="926" y="2654" font-size="12.5" fill="#475569" text-anchor="middle">Black automated PEP 8 formatting</text>
+  <rect x="1122" y="2608" width="300" height="62" rx="12" fill="#F1F5F9" stroke="#DBE3EC"/><text x="1272" y="2634" font-size="15" font-weight="600" fill="#0F172A" text-anchor="middle">Route Authorization Audit</text><text x="1272" y="2654" font-size="12.5" fill="#475569" text-anchor="middle">Checks protected-route enforcement</text>
+  <rect x="1468" y="2608" width="300" height="62" rx="12" fill="#F1F5F9" stroke="#DBE3EC"/><text x="1618" y="2634" font-size="15" font-weight="600" fill="#0F172A" text-anchor="middle">End-to-End Smoke Journey</text><text x="1618" y="2654" font-size="12.5" fill="#475569" text-anchor="middle">Fresh database &amp; real user journeys</text>
+  <rect x="1814" y="2608" width="300" height="62" rx="12" fill="#F1F5F9" stroke="#DBE3EC"/><text x="1964" y="2634" font-size="15" font-weight="600" fill="#0F172A" text-anchor="middle">Database Migration Test</text><text x="1964" y="2654" font-size="12.5" fill="#475569" text-anchor="middle">Validates schema upgrades to head revision</text>
+
+  <g stroke="#94A3B8" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M396 2632 l10 7 -10 7"/><path d="M742 2632 l10 7 -10 7"/><path d="M1088 2632 l10 7 -10 7"/><path d="M1434 2632 l10 7 -10 7"/><path d="M1780 2632 l10 7 -10 7"/>
+  </g>
+
+  <!-- ============================ FOOTER ============================ -->
+  <text x="60" y="2724" font-size="13.5" fill="#64748B">Synthetic data only · verified locally and in CI · PostgreSQL deployment path implemented, no live production deployment is claimed.</text>
+  <text x="60" y="2748" font-size="13.5" font-style="italic" fill="#64748B">AI-generated decision-support draft; human review required.</text>
+</svg>
