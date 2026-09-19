@@ -1,0 +1,1 @@
+import{d as i}from"./react-EmQYrLMC.js";function f(){const[o,c]=i();function a(e){c(r=>{const t=new URLSearchParams(r);for(const[s,n]of Object.entries(e))n?t.set(s,n):t.delete(s);return t})}function u(e){a(Object.fromEntries(e.map(r=>[r,void 0])))}return{params:o,update:a,clear:u}}export{f as u};

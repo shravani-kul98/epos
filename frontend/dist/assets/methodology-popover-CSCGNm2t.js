@@ -1,0 +1,1 @@
+import{j as s}from"./index-BtyNifD2.js";function r({title:e="How to read this view",children:o}){return s.jsxs("details",{className:"disclosure",children:[s.jsx("summary",{children:e}),s.jsx("div",{className:"space-y-2 p-4 text-body text-ink-secondary",children:o})]})}export{r as M};

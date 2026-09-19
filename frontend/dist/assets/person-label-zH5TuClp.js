@@ -1,0 +1,1 @@
+function s(e){const l=new Set,n=new Set;for(const a of e)l.has(a.full_name)&&n.add(a.full_name),l.add(a.full_name);return n}function t(e,l,n=!0){const a=[e.full_name];return l.has(e.full_name)&&a.push(e.email),n&&e.role_label&&a.push(e.role_label),a.join(" · ")}export{t as p,s};
