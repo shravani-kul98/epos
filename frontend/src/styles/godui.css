@@ -1,0 +1,196 @@
+/*! GodUI adaptations — MIT License. Copyright (c) 2026 Lucas Bassetti.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. */
+:where(.godui-shimmer) {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  border: 1px solid transparent;
+  border-radius: var(--godui-radius);
+  background: var(--godui-button-bg);
+  color: var(--godui-primary-foreground);
+  font-weight: 600;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--motion-base) var(--motion-ease), box-shadow var(--motion-base) var(--motion-ease);
+}
+:where(.godui-shimmer[data-size="sm"]) { min-height: 36px; padding: 6px 12px; font-size: var(--font-meta); }
+:where(.godui-shimmer[data-size="md"]) { min-height: 40px; padding: 8px 14px; font-size: var(--font-body); }
+:where(.godui-shimmer[data-size="lg"]) { min-height: 52px; padding: 14px 24px; font-size: 1rem; }
+:where(.godui-shimmer[data-variant="secondary"], .godui-shimmer[data-variant="outline"]) {
+  --godui-button-bg: var(--surface);
+  --godui-shimmer-color: var(--accent);
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+:where(.godui-shimmer[data-variant="secondary"]) { border-color: var(--border); }
+:where(.godui-shimmer[data-variant="ghost"]) { --godui-button-bg: transparent; color: var(--text-secondary); font-weight: 500; }
+:where(.godui-shimmer[data-variant="danger"]) { --godui-button-bg: var(--critical); color: var(--text-on-status); }
+:where(.godui-shimmer[data-variant="primary"]:hover:not(:disabled)) { --godui-button-bg: var(--accent-hover); box-shadow: var(--shadow-raised); }
+:where(.godui-shimmer[data-variant="secondary"]:hover:not(:disabled), .godui-shimmer[data-variant="ghost"]:hover:not(:disabled)) { --godui-button-bg: var(--surface-subtle); color: var(--text); }
+.godui-shimmer:active:not(:disabled), .godui-shimmer[data-pressed="true"] { transform: translateY(1px); }
+.godui-shimmer:disabled { cursor: not-allowed; opacity: 0.5; }
+.godui-shimmer.icon-button { padding: 0; }
+:where(.godui-shimmer-label) { position: relative; z-index: 2; display: inline-flex; align-items: inherit; justify-content: inherit; gap: inherit; min-width: 0; }
+.godui-shimmer-track { position: absolute; inset: 0; z-index: -2; container-type: size; pointer-events: none; }
+.godui-shimmer-slide { position: absolute; inset: 0; aspect-ratio: 1; height: 100cqh; animation: godui-shimmer-slide var(--godui-shimmer-speed) ease-in-out infinite alternate; }
+.godui-shimmer-spark { position: absolute; inset: -100%; background: conic-gradient(from 240deg, transparent 0deg, var(--godui-shimmer-color) 55deg, transparent 55deg); animation: godui-spin-around calc(var(--godui-shimmer-speed) * 2) linear infinite; }
+.godui-shimmer-cut { position: absolute; z-index: -1; inset: var(--godui-shimmer-cut); border-radius: inherit; background: var(--godui-button-bg); pointer-events: none; }
+.godui-shimmer:not([data-shimmer="true"]) .godui-shimmer-track,
+.godui-shimmer:not([data-shimmer="true"]) .godui-shimmer-cut,
+.godui-shimmer:disabled .godui-shimmer-track { display: none; }
+.godui-shimmer:not(:hover):not(:focus-visible) .godui-shimmer-slide,
+.godui-shimmer:not(:hover):not(:focus-visible) .godui-shimmer-spark { animation-play-state: paused; }
+@keyframes godui-shimmer-slide { to { transform: translateX(calc(100cqw - 100%)); } }
+@keyframes godui-spin-around { 0% { transform: rotate(0); } 15%, 35% { transform: rotate(90deg); } 65%, 85% { transform: rotate(270deg); } 100% { transform: rotate(360deg); } }
+
+.godui-input { position: relative; display: block; width: 100%; border-radius: var(--godui-radius); }
+.godui-input-front { position: relative; z-index: 1; min-height: 48px; border-radius: inherit; transition: transform var(--motion-base) var(--motion-ease), border-color var(--motion-fast) var(--motion-ease); }
+.godui-input[data-size="sm"] .godui-input-front { min-height: 40px; }
+.godui-input[data-size="lg"] .godui-input-front { min-height: 56px; }
+.godui-input[data-leading="true"] .godui-input-front { padding-left: 44px; }
+.godui-input[data-submit="true"] .godui-input-front { padding-right: 52px; }
+.godui-input-edge, .godui-input-shadow { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: var(--godui-input-fill); opacity: 0; transition: opacity var(--motion-base) var(--motion-ease), transform var(--motion-base) var(--motion-ease); }
+.godui-input-shadow { filter: blur(6px); }
+.godui-input:focus-within .godui-input-edge, .godui-input[data-depth="always"] .godui-input-edge { opacity: 1; }
+.godui-input:focus-within .godui-input-shadow, .godui-input[data-depth="always"] .godui-input-shadow { opacity: 0.12; transform: translateY(4px); }
+.godui-input:focus-within .godui-input-front, .godui-input:focus-within .godui-input-icon,
+.godui-input[data-depth="always"] .godui-input-front, .godui-input[data-depth="always"] .godui-input-icon { transform: translateY(-2px); }
+.godui-input[data-rainbow="true"]:focus-within .godui-input-edge { background-image: var(--godui-gradient); background-size: 200% 100%; animation: godui-rainbow 4s linear infinite; }
+.godui-input-icon { position: absolute; z-index: 2; left: 14px; top: 0; height: 100%; display: grid; place-items: center; pointer-events: none; color: var(--text-muted); transition: transform var(--motion-base) var(--motion-ease), color var(--motion-base) var(--motion-ease); }
+.godui-input:focus-within .godui-input-icon { color: var(--accent); }
+.godui-input-submit { position: absolute; z-index: 3; right: 6px; top: 6px; bottom: 6px; aspect-ratio: 1; border-radius: var(--godui-radius); background: var(--godui-input-fill); color: var(--text-on-accent); }
+.godui-input-state { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transform: scale(0.4) rotate(-35deg); transition: transform var(--motion-base), opacity var(--motion-base); }
+.godui-input-state[data-active="true"] { opacity: 1; transform: scale(1); }
+.godui-input[data-status="success"] { --godui-input-fill: var(--ok); }
+.godui-input[data-status="error"] { --godui-input-fill: var(--critical); }
+.godui-input[data-status="success"] .godui-input-submit, .godui-input[data-status="error"] .godui-input-submit { color: var(--text-on-status); }
+.godui-input:not([data-status="idle"]) .godui-input-edge { opacity: 1; background-size: 100% 100%; background-image: linear-gradient(var(--godui-input-fill), var(--godui-input-fill)); background-repeat: no-repeat; }
+.godui-input[data-status="loading"]:not([data-determinate]) .godui-input-edge { background-image: linear-gradient(90deg, transparent, var(--godui-input-fill), transparent); background-size: 45% 100%; animation: godui-input-progress 1.2s ease-in-out infinite alternate; }
+.godui-input[data-determinate="true"] .godui-input-edge { background-size: var(--godui-input-progress) 100%; }
+.godui-input[data-armed="true"] .godui-input-edge { transition: background-size var(--motion-base) var(--motion-ease); }
+.godui-input[data-disabled="true"] .godui-input-edge, .godui-input[data-disabled="true"] .godui-input-shadow { display: none; }
+.godui-spinner { animation: godui-spinner 0.8s linear infinite; }
+@keyframes godui-spinner { to { transform: rotate(360deg); } }
+@keyframes godui-input-progress { from { background-position: 110% center; } to { background-position: -10% center; } }
+@keyframes godui-rainbow { to { background-position: 200% 50%; } }
+
+:where(.godui-spotlight) { position: relative; isolation: isolate; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); color: var(--text); }
+.godui-spotlight-glow, .godui-spotlight-border { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity var(--motion-base) var(--motion-ease); background: radial-gradient(var(--godui-spot-radius) circle at var(--godui-x) var(--godui-y), var(--godui-spot-color), transparent 65%); }
+.godui-spotlight:hover .godui-spotlight-glow, .godui-spotlight:hover .godui-spotlight-border, .godui-spotlight:focus-within .godui-spotlight-border { opacity: 1; }
+.godui-spotlight-border { padding: 1px; border-radius: inherit; mask: linear-gradient(var(--godui-mask) 0 0) content-box, linear-gradient(var(--godui-mask) 0 0); mask-composite: exclude; }
+:where(.godui-spotlight[data-contain="false"]) { overflow: visible; }
+.godui-spotlight[data-contain="false"] > .godui-spotlight-glow { z-index: -1; border-radius: inherit; }
+.godui-overlay-scrim { backdrop-filter: blur(3px); }
+.godui-overlay-chrome { background: var(--godui-glass-tint); backdrop-filter: blur(14px); box-shadow: var(--shadow-overlay); }
+
+.godui-glass { position: relative; isolation: isolate; min-width: 0; border: 1px solid var(--godui-glass-edge); border-radius: var(--godui-panel-radius); background: var(--godui-glass-tint); color: var(--text); box-shadow: var(--shadow-overlay); }
+.godui-glass-frost, .godui-glass-sheen, .godui-glass-rim { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; }
+.godui-glass-sheen { background: radial-gradient(circle at var(--godui-x) var(--godui-y), color-mix(in srgb, var(--accent) 8%, transparent), transparent 45%); transition: opacity var(--motion-base); }
+.godui-glass-rim { box-shadow: inset 0 1px 0 var(--godui-glass-edge); opacity: var(--godui-glass-sheen); }
+
+.godui-blueprint { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; perspective: 600px; }
+.godui-blueprint-grid, .godui-blueprint-spot { position: absolute; inset: 0; }
+.godui-blueprint-grid { opacity: 0.45; mask-image: radial-gradient(ellipse at 70% 40%, var(--godui-mask), transparent 75%); }
+.godui-blueprint-perspective { inset: 0 -50%; height: 160%; transform: rotateX(72deg); transform-origin: bottom; mask-image: linear-gradient(to top, var(--godui-mask), transparent); }
+.godui-blueprint-spot { opacity: var(--godui-grid-opacity); transition: opacity var(--motion-base); }
+.godui-blueprint-sweep { position: absolute; top: -60%; left: -20%; width: 40%; height: 160%; background: linear-gradient(90deg, transparent, var(--godui-glow), transparent); animation: godui-blueprint-sweep var(--godui-sweep-speed) linear infinite; }
+@keyframes godui-blueprint-sweep { from { transform: translate(-60%, -20%) rotate(-25deg); opacity: 0; } 20%, 70% { opacity: 0.6; } to { transform: translate(320%, 45%) rotate(-25deg); opacity: 0; } }
+[data-motion-paused="true"] .godui-blueprint-sweep { animation-play-state: paused; }
+
+:where(.godui-tabs) { display: inline-flex; align-items: stretch; gap: 8px; padding: 8px; border-radius: var(--radius-card); background: var(--surface-subtle); }
+.godui-tab { position: relative; min-width: 0; border: 0; padding: 0; border-radius: var(--godui-radius); background: transparent; cursor: pointer; color: var(--text-secondary); }
+.godui-tab:disabled { opacity: 0.5; cursor: not-allowed; }
+.godui-tab-front { position: relative; display: flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 10px 16px; border: 1px solid transparent; border-radius: inherit; font-size: var(--font-body); font-weight: 500; transition: transform var(--motion-base) var(--motion-ease), background-color var(--motion-base), color var(--motion-base); }
+.godui-tab-front svg { flex-shrink: 0; }
+.godui-tab-shadow, .godui-tab-edge { position: absolute; inset: 0; border-radius: inherit; opacity: 0; pointer-events: none; transition: opacity var(--motion-base); }
+.godui-tab-edge { background: var(--accent-border); }
+.godui-tab-shadow { box-shadow: var(--shadow-raised); transform: translateY(2px); }
+.godui-tab[aria-selected="true"] .godui-tab-front { transform: translateY(-2px); background: var(--accent); color: var(--text-on-accent); }
+.godui-tab[aria-selected="true"] .godui-tab-edge, .godui-tab[aria-selected="true"] .godui-tab-shadow { opacity: 1; }
+.godui-tabs[data-variant="secondary"] .godui-tab[aria-selected="true"] .godui-tab-front { background: var(--surface); color: var(--accent); border-color: var(--border); }
+.godui-tab:not([aria-selected="true"]):hover:not(:disabled) .godui-tab-front { background: var(--surface); color: var(--text); }
+.godui-tabs[data-size="sm"] .godui-tab-front { padding: 8px 12px; font-size: var(--font-meta); }
+.godui-tabs[data-size="lg"] .godui-tab-front { min-height: 52px; padding: 12px 22px; font-size: 1rem; }
+.godui-tabs[data-rainbow="true"] .godui-tab[aria-selected="true"] .godui-tab-edge { background-image: var(--godui-gradient); background-size: 200% 100%; animation: godui-rainbow 4s linear infinite; animation-play-state: var(--godui-tab-play-state); }
+.godui-light-rays { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.godui-rays-source, .godui-rays-grain { position: absolute; inset: 0; width: 100%; height: 100%; }
+.godui-rays-fan { position: absolute; inset: -50%; transform-origin: top; filter: blur(8px); opacity: var(--godui-rays-intensity); mask-image: linear-gradient(to bottom, var(--godui-mask) 10%, transparent 75%); animation: godui-light-sweep var(--godui-rays-speed) ease-in-out infinite alternate; }
+.godui-rays-grain { mix-blend-mode: overlay; }
+.godui-light-rays[data-paused="true"] .godui-rays-fan { animation-play-state: paused; }
+@keyframes godui-light-sweep {
+  from { transform: rotate(calc(var(--godui-rays-angle) - 6deg)) scale(1); opacity: calc(var(--godui-rays-intensity) * 0.7); }
+  to { transform: rotate(calc(var(--godui-rays-angle) + 6deg)) scale(1.08); opacity: var(--godui-rays-intensity); }
+}
+
+:where(.godui-lift) { position: relative; isolation: isolate; display: inline-flex; border: 0; border-radius: var(--radius-control); padding: 0; background: transparent; color: var(--text-on-accent); font-weight: 600; cursor: pointer; }
+.godui-lift-shadow, .godui-lift-edge { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; }
+.godui-lift-shadow { transform: translateY(2px); box-shadow: var(--shadow-raised); transition: transform var(--motion-base) var(--motion-ease); }
+.godui-lift-edge { background: color-mix(in srgb, var(--accent) 65%, var(--text)); }
+.godui-lift-front { position: relative; display: flex; width: 100%; min-width: 0; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 10px 16px; border: 1px solid transparent; border-radius: inherit; background: var(--accent); color: var(--text-on-accent); transform: translateY(-2px); transition: transform var(--motion-base) var(--motion-ease), background-color var(--motion-base); font-size: var(--font-body); font-weight: 600; }
+.godui-lift[data-size="sm"] .godui-lift-front { min-height: 36px; padding: 7px 12px; font-size: var(--font-meta); }
+.godui-lift[data-size="lg"] .godui-lift-front { min-height: 50px; padding: 13px 22px; font-size: 1rem; }
+.godui-lift[data-variant="secondary"] { color: var(--text); }
+.godui-lift[data-variant="secondary"] .godui-lift-front { background: var(--surface); color: var(--text); border-color: var(--border); }
+.godui-lift[data-variant="secondary"] .godui-lift-edge { background: var(--border-strong); }
+.godui-lift:is(:hover, :focus-visible):not(:disabled) .godui-lift-front { transform: translateY(-4px); }
+.godui-lift:active:not(:disabled) .godui-lift-front, .godui-lift[data-pressed="true"] .godui-lift-front { transform: translateY(0); }
+.godui-lift:disabled { opacity: 0.5; cursor: not-allowed; }
+.godui-lift:disabled .godui-lift-front { transform: none; }
+.godui-lift:disabled .godui-lift-shadow, .godui-lift:disabled .godui-lift-edge { display: none; }
+.godui-lift[data-rainbow="true"] .godui-lift-edge { background-image: var(--godui-gradient); background-size: 200% 100%; animation: godui-rainbow 4s linear infinite; animation-play-state: var(--godui-lift-play-state); }
+:where(.godui-fold) { position: relative; isolation: isolate; display: inline-flex; padding: 0; border: 0; border-radius: var(--radius-control); background: var(--border); perspective: 800px; cursor: pointer; font-weight: 600; }
+.godui-fold-layers { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
+.godui-fold-back { position: absolute; inset: 0; background: var(--accent-tint); }
+.godui-fold-front { position: relative; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 42px; border: 1px solid transparent; border-radius: inherit; background: var(--accent); color: var(--text-on-accent); padding: 10px 16px; font-size: var(--font-body); font-weight: 600; transform: rotateX(0); transform-origin: top center; transition: transform var(--motion-base) var(--motion-ease); }
+.godui-fold[data-variant="secondary"] .godui-fold-front { background: var(--surface); color: var(--text); border-color: var(--border-strong); }
+.godui-fold[data-size="sm"] .godui-fold-front { min-height: 36px; padding: 7px 12px; font-size: var(--font-meta); }
+.godui-fold[data-size="lg"] .godui-fold-front { min-height: 50px; padding: 13px 22px; font-size: 1rem; }
+.godui-fold:is(:hover, :focus-visible):not(:disabled) .godui-fold-front { transform: rotateX(10deg); }
+.godui-fold[data-status="loading"] .godui-fold-front { transform: rotateX(24deg); }
+.godui-fold:disabled { cursor: not-allowed; }
+.godui-fold:disabled:not([data-status="loading"]) { opacity: 0.5; }
+.godui-fold-bar { position: absolute; inset: 0; transform: scaleX(0); transform-origin: left; background: var(--accent); }
+.godui-fold[data-determinate="true"] .godui-fold-bar { transform: scaleX(var(--godui-fold-fill)); }
+.godui-fold[data-armed="true"] .godui-fold-bar { transition: transform var(--motion-base) var(--motion-ease); }
+.godui-fold[data-status="loading"]:not([data-determinate]) .godui-fold-bar { width: 40%; animation: godui-fold-progress 1.2s ease-in-out infinite; }
+@keyframes godui-fold-progress { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .godui-lift-front, .godui-fold-front, .godui-lift-shadow { transform: none !important; }
+  .godui-lift-edge, .godui-fold-bar { animation: none !important; }
+  .godui-fold[data-status="loading"]:not([data-determinate]) .godui-fold-bar { transform: none; }
+  .godui-blueprint-sweep, .godui-blueprint-spot, .godui-shimmer-track, .godui-glass-sheen { display: none; }
+  .godui-rays-fan, .godui-tab-edge { animation: none !important; }
+  .godui-tab[aria-selected="true"] .godui-tab-front { transform: none; }
+  .godui-input:focus-within .godui-input-front, .godui-input:focus-within .godui-input-icon,
+  .godui-input[data-depth="always"] .godui-input-front, .godui-input[data-depth="always"] .godui-input-icon,
+  .godui-shimmer:active, .godui-shimmer[data-pressed="true"] { transform: none; }
+  .godui-input-edge, .godui-spinner { animation: none !important; }
+}
+
+@media (forced-colors: active) {
+  .godui-lift-front, .godui-fold-front { background: ButtonFace !important; color: ButtonText !important; border: 1px solid ButtonText; }
+  .godui-lift-shadow, .godui-lift-edge, .godui-fold-layers { display: none; }
+  .godui-shimmer { border: 1px solid ButtonText; color: ButtonText; background: ButtonFace; }
+  .godui-shimmer-track, .godui-shimmer-cut, .godui-blueprint, .godui-glass-frost { display: none; }
+  .godui-glass, .godui-spotlight { border: 1px solid CanvasText; }
+  .godui-light-rays, .godui-tab-edge, .godui-tab-shadow { display: none; }
+  .godui-tab[aria-selected="true"] .godui-tab-front { border-color: Highlight; }
+}

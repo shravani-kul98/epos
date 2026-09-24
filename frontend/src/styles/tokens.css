@@ -1,0 +1,268 @@
+/**
+ * Design tokens.
+ *
+ * Raw colour values appear here and nowhere else. Application components reference semantic
+ * names, so a theme change is a change to this file alone.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Foundation */
+  --canvas: #f4f7fb;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-subtle: #f1f5f9;
+  --border: #d9e2ee;
+  --border-strong: #7d8ca2;
+
+  /* Text */
+  --text: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #52647b;
+  --text-on-accent: #ffffff;
+  --text-on-status: #ffffff;
+
+  /* Navigation */
+  --nav-surface: #f5f7fc;
+  --nav-text: #475569;
+  --nav-text-strong: #18233a;
+  --nav-hover: #edf0f7;
+  --nav-active: #e9eefb;
+  --nav-marker: #2563eb;
+  --nav-border: #dce2ee;
+
+  /* Primary action */
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-tint: #eff6ff;
+  --accent-border: #bfdbfe;
+
+  /* Steel, for neutral technical context */
+  --steel: #475569;
+
+  /* Status */
+  --ok: #15803d;
+  --ok-tint: #f0fdf4;
+  --warn: #b45309;
+  --warn-tint: #fffbeb;
+  --critical: #b91c1c;
+  --critical-tint: #fef2f2;
+  --advisory: #c2410c;
+  --advisory-tint: #fff7ed;
+  --neutral: #64748b;
+  --neutral-tint: #f1f5f9;
+
+  /* Analytics */
+  --teal: #0f766e;
+  --teal-tint: #f0fdfa;
+  --purple: #7e22ce;
+  --purple-tint: #faf5ff;
+  --indigo: #4338ca;
+  --indigo-tint: #eef2ff;
+  --cyan: #0e7490;
+  --cyan-tint: #ecfeff;
+  --violet: #6d28d9;
+  --violet-tint: #f5f3ff;
+
+  /* Domain series, so a category keeps one colour product-wide */
+  --domain-schedule: #2563eb;
+  --domain-risk: #b91c1c;
+  --domain-quality: #7e22ce;
+  --domain-requirements: #6d28d9;
+  --domain-dependencies: #b45309;
+  --domain-testing: #047857;
+  --domain-capacity: #0e7490;
+  --domain-intelligence: #7e22ce;
+  --domain-traceability: #4338ca;
+  --domain-scenarios: #0f766e;
+  --domain-governance: #475569;
+  --overlay: rgb(8 19 38 / 0.56);
+  --print-surface: #ffffff;
+  --print-text: #0f172a;
+
+  --public-canvas: #fcfaf7;
+  --public-peach: #faeee6;
+  --public-lilac: #eeedfc;
+  --public-mint: #e8f3ee;
+  --public-ink: #182747;
+  --public-on-ink: #f8fafc;
+  --public-muted-on-ink: #c7d6ec;
+  --public-story-glow: #a8bffa;
+  --shadow-public: 0 28px 80px -38px rgb(25 43 84 / 0.24), 0 2px 8px rgb(25 43 84 / 0.03);
+
+  /* Elevation */
+  --shadow-card: 0 1px 3px rgb(15 23 42 / 0.03);
+  --shadow-raised: 0 4px 6px -1px rgb(15 23 42 / 0.08), 0 2px 4px -2px rgb(15 23 42 / 0.06);
+  --shadow-overlay: 0 20px 25px -5px rgb(15 23 42 / 0.12), 0 8px 10px -6px rgb(15 23 42 / 0.08);
+
+  /* Geometry */
+  --radius-control: 10px;
+  --radius-card: 14px;
+  --radius-overlay: 16px;
+  --content-max-width: 1600px;
+  --layout-sidebar: 248px;
+  --layout-sidebar-compact: 72px;
+  --layout-header: 64px;
+  --space-page: 24px;
+  --space-section: 32px;
+  --font-sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-meta: 0.8125rem;
+  --font-table: 0.875rem;
+  --font-body: 0.875rem;
+  --font-card: 0.9375rem;
+  --font-section: 1.125rem;
+  --font-title: 1.625rem;
+  --font-kpi: 1.875rem;
+  --font-identifier: 0.8125rem;
+  --font-chart: 12px;
+  --line-meta: 1.125rem;
+  --line-body: 1.375rem;
+  --line-heading: 1.35;
+
+  /* Motion. Short and near-linear; enterprise tools should feel immediate. */
+  --motion-fast: 120ms;
+  --motion-base: 180ms;
+  --motion-ease: cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --canvas: #0b1220;
+  --surface: #111827;
+  --surface-raised: #172033;
+  --surface-subtle: #1e293b;
+  --border: #334155;
+  --border-strong: #708299;
+
+  --text: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-on-accent: #0b1220;
+  --text-on-status: #0b1220;
+
+  --nav-surface: #0d182a;
+  --nav-text: #b3c3d9;
+  --nav-text-strong: #f8fafc;
+  --nav-hover: #1e293b;
+  --nav-active: #203958;
+  --nav-marker: #93c5fd;
+  --nav-border: #29415d;
+
+  --accent: #60a5fa;
+  --accent-hover: #93c5fd;
+  --accent-tint: #172554;
+  --accent-border: #1e40af;
+
+  --steel: #94a3b8;
+
+  --ok: #4ade80;
+  --ok-tint: #052e16;
+  --warn: #fbbf24;
+  --warn-tint: #451a03;
+  --critical: #f87171;
+  --critical-tint: #450a0a;
+  --advisory: #fb923c;
+  --advisory-tint: #431407;
+  --neutral: #94a3b8;
+  --neutral-tint: #1e293b;
+
+  --teal: #2dd4bf;
+  --teal-tint: #042f2e;
+  --purple: #c084fc;
+  --purple-tint: #2e1065;
+  --indigo: #818cf8;
+  --indigo-tint: #1e1b4b;
+  --cyan: #22d3ee;
+  --cyan-tint: #083344;
+  --violet: #c4b5fd;
+  --violet-tint: #2e2052;
+
+  --domain-schedule: #60a5fa;
+  --domain-risk: #f87171;
+  --domain-quality: #c084fc;
+  --domain-requirements: #c4b5fd;
+  --domain-dependencies: #fbbf24;
+  --domain-testing: #6ee7b7;
+  --domain-capacity: #22d3ee;
+  --domain-intelligence: #c084fc;
+  --domain-traceability: #a5b4fc;
+  --domain-scenarios: #2dd4bf;
+  --domain-governance: #cbd5e1;
+  --overlay: rgb(0 5 16 / 0.72);
+  --print-surface: #ffffff;
+  --print-text: #0f172a;
+
+  --public-canvas: #101722;
+  --public-peach: #292127;
+  --public-lilac: #242540;
+  --public-mint: #142d2b;
+  --public-ink: #16233d;
+  --public-on-ink: #f8fafc;
+  --public-muted-on-ink: #c7d6ec;
+  --public-story-glow: #a8bffa;
+  --shadow-public: 0 28px 80px -32px rgb(0 0 0 / 0.6), 0 2px 8px rgb(0 0 0 / 0.2);
+
+  --shadow-card: 0 1px 3px rgb(0 0 0 / 0.15);
+  --shadow-raised: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-overlay: 0 20px 25px -5px rgb(0 0 0 / 0.6), 0 8px 10px -6px rgb(0 0 0 / 0.5);
+}
+
+:root, [data-theme="dark"] {
+  /* GodUI aliases stay isolated from EPOS's existing accent and surface names. */
+  --godui-background: var(--canvas);
+  --godui-foreground: var(--text);
+  --godui-primary: var(--accent);
+  --godui-primary-foreground: var(--text-on-accent);
+  --godui-muted: var(--text-secondary);
+  --godui-border: var(--border);
+  --godui-radius: var(--radius-control);
+  --godui-panel-radius: var(--radius-overlay);
+  --godui-glass-tint: color-mix(in srgb, var(--surface) 94%, transparent);
+  --godui-glass-edge: color-mix(in srgb, var(--surface) 80%, var(--accent-border));
+  --godui-grid: color-mix(in srgb, var(--accent) 16%, transparent);
+  --godui-glow: color-mix(in srgb, var(--accent) 14%, transparent);
+  --godui-gradient: linear-gradient(110deg, var(--accent), var(--indigo), var(--teal), var(--accent));
+  --godui-button-bg: var(--accent);
+  --godui-shimmer-color: color-mix(in srgb, var(--text-on-accent) 75%, var(--accent));
+  --godui-shimmer-speed: 4s;
+  --godui-shimmer-cut: 1px;
+  --godui-sweep-speed: 18s;
+  --godui-input-progress: 0%;
+  --godui-input-fill: var(--accent);
+  --godui-glass-sheen: 0.18;
+  --godui-x: 50%;
+  --godui-y: 50%;
+  --godui-spot-color: var(--godui-glow);
+  --godui-spot-radius: 350px;
+  --godui-grid-opacity: 0;
+  --godui-mask: #000000;
+  /* These encode SVG displacement channels, not visible interface colours. */
+  --godui-map-red: #ff0000;
+  --godui-map-mid-red: #800000;
+  --godui-map-green: #00ff00;
+  --godui-map-mid-green: #008000;
+  --godui-map-zero: #000000;
+  --godui-tab-play-state: running;
+  --godui-lift-play-state: running;
+  --godui-fold-fill: 0;
+  --metric-tone: var(--accent);
+  --metric-tint: var(--accent-tint);
+  --godui-rays-speed: 28s;
+  --godui-rays-angle: -15deg;
+  --godui-rays-intensity: 0.25;
+  --public-tone: var(--accent);
+  --public-tone-tint: var(--accent-tint);
+  --motion-shimmer: 4s;
+  --motion-entrance: 640ms;
+  --font-hero: clamp(3.25rem, 6.7vw, 5.625rem);
+  --font-editorial: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-base: 0ms;
+  }
+}

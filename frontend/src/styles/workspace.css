@@ -1,0 +1,129 @@
+.scenario-workflow { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; padding: 15px 18px; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); color: var(--text-secondary); font-size: var(--font-meta); }
+.scenario-workflow > span { display: inline-flex; align-items: center; gap: 8px; }
+.scenario-workflow > span > svg { color: var(--teal); }
+.scenario-workflow-note { margin-left: auto; color: var(--text-muted); font-size: 11px; }
+.scenario-input-card { box-shadow: var(--shadow-raised); }
+.scenario-input-card .card-header { background: var(--teal-tint); border-radius: var(--radius-card) var(--radius-card) 0 0; }
+.scenario-brief { padding: 24px; border: 1px solid var(--border); border-top: 3px solid var(--teal); border-radius: var(--radius-card); background: var(--surface); box-shadow: var(--shadow-card); }
+.scenario-brief > header { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.scenario-brief h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.035em; margin-top: 3px; }
+.scenario-brief-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px; color: var(--teal); background: var(--teal-tint); }
+.scenario-run-label { margin-left: auto; border: 1px solid var(--border); padding: 6px 10px; border-radius: 8px; color: var(--text-secondary); font-size: 12px; }
+.scenario-brief > ol { display: grid; gap: 0; }
+.scenario-brief > ol > li { padding: 19px 0; border-bottom: 1px solid var(--border); }
+.scenario-brief > ol > li:last-child { padding-bottom: 0; border: 0; }
+.scenario-brief h3 { font-size: 15px; line-height: 1.5; font-weight: 600; }
+.scenario-brief li > p { margin-top: 6px; font-size: 13px; line-height: 1.8; color: var(--text-secondary); }
+.scenario-brief li[data-kind="review"] h3 { color: var(--warn); }
+
+/*! MIT License. Copyright (c) 2023 shadcn.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. */
+.copilot-workspace { max-width: 1420px; margin: auto; }
+.copilot-layout { display: grid; grid-template-columns: 232px minmax(0, 1fr); align-items: start; gap: 20px; }
+.copilot-history { padding: 16px 12px; border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); }
+.copilot-history-heading { display: flex; align-items: center; gap: 9px; padding: 0 4px 16px; color: var(--text-secondary); }
+.copilot-history-heading h2 { font-size: 13px; font-weight: 600; }
+.copilot-history .godui-input-front { min-height: 40px; font-size: 12px; }
+.copilot-history-notice { font-size: 11px; line-height: 1.7; color: var(--text-muted); margin: 14px 4px; }
+.copilot-history > ul { display: grid; gap: 6px; max-height: 52dvh; overflow-y: auto; padding: 3px; }
+.copilot-history li > button { display: flex; align-items: start; width: 100%; gap: 9px; padding: 11px 9px; text-align: left; border: 1px solid transparent; border-radius: 10px; color: var(--text-secondary); }
+.copilot-history li > button > svg { margin-top: 2px; flex-shrink: 0; }
+.copilot-history li > button > span { min-width: 0; }
+.copilot-history li strong { display: block; font-size: 12px; font-weight: 500; line-height: 1.6; overflow-wrap: anywhere; }
+.copilot-history li small { display: block; font-size: 10px; margin-top: 5px; color: var(--text-muted); }
+.copilot-history li > button:hover { background: var(--surface-subtle); }
+.copilot-history li > button[aria-current="page"] { background: var(--accent-tint); color: var(--accent); border-color: var(--accent-border); }
+.copilot-history-delete { display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--border); margin-top: 18px; padding-top: 14px; }
+.copilot-history-delete > p { font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin: 0 4px 8px; }
+.copilot-main { min-width: 0; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); box-shadow: var(--shadow-card); }
+.copilot-context-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 15px 22px; border-bottom: 1px solid var(--border); border-radius: 18px 18px 0 0; background: var(--surface-subtle); font-size: 11px; color: var(--text-muted); }
+.copilot-context-bar > span:first-child { display: inline-flex; gap: 8px; align-items: center; color: var(--text-secondary); font-size: 12px; overflow-wrap: anywhere; }
+.copilot-context-bar svg { flex-shrink: 0; color: var(--accent); }
+.copilot-thread { min-height: 350px; padding: 24px; }
+.copilot-empty { min-height: 350px; padding: 32px 12px; }
+.copilot-empty h2 { font-size: clamp(22px, 2.2vw, 30px); letter-spacing: -0.04em; font-weight: 500; line-height: 1.25; }
+.copilot-empty [data-slot="empty-icon"] { height: 52px; width: 52px; box-shadow: var(--shadow-raised); background: linear-gradient(145deg, var(--accent-tint), var(--indigo-tint)); color: var(--indigo); }
+.copilot-eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-muted); margin-bottom: 5px; }
+.copilot-starters { width: 100%; max-width: 600px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.copilot-starters > button { display: flex; align-items: start; text-align: left; gap: 11px; border: 1px solid var(--border); border-radius: 12px; padding: 16px; color: var(--text-secondary); background: var(--surface); font-size: 12px; line-height: 1.7; }
+.copilot-starters > button > svg { margin-top: 3px; color: var(--accent); flex-shrink: 0; }
+.copilot-starters > button:hover { background: var(--accent-tint); border-color: var(--accent-border); color: var(--text); }
+.copilot-turns { display: grid; gap: 28px; }
+.copilot-turns > li { min-width: 0; }
+.copilot-question { display: flex; align-items: end; flex-direction: column; gap: 7px; margin-bottom: 15px; }
+.copilot-question > p { font-size: 11px; color: var(--text-muted); }
+.copilot-question > div { max-width: 82%; padding: 13px 17px; border: 1px solid var(--accent-border); border-radius: 14px 14px 3px 14px; background: var(--accent-tint); color: var(--text); line-height: 1.7; font-size: 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.copilot-question > span { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; color: var(--text-muted); }
+.copilot-answer { border: 1px solid var(--border); border-radius: 14px; background: var(--surface); overflow-wrap: anywhere; }
+.copilot-answer > header { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; padding: 14px 17px; border-bottom: 1px solid var(--border); }
+.copilot-answer-mark { display: grid; place-items: center; width: 28px; height: 28px; background: var(--indigo-tint); color: var(--indigo); border-radius: 8px; }
+.copilot-answer h2 { font-size: 13px; font-weight: 600; }
+.copilot-answer header > span:last-child { margin-left: auto; font-size: 10px; color: var(--text-muted); }
+.copilot-answer-body { padding: 20px; }
+.copilot-answer-summary { font-size: 15px; line-height: 1.8; white-space: pre-line; }
+.copilot-project-links { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 15px; }
+.copilot-project-links > a { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--accent-border); border-radius: 7px; background: var(--accent-tint); color: var(--accent); padding: 6px 9px; font-size: 11px; }
+.copilot-project-links svg { flex-shrink: 0; }
+.copilot-answer-section { margin-top: 22px; }
+.copilot-answer-section h3 { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+.copilot-answer-section ul { display: grid; gap: 9px; }
+.copilot-answer-section li { position: relative; font-size: 13px; color: var(--text-secondary); line-height: 1.85; padding-left: 14px; }
+.copilot-answer-section li::before { content: ""; position: absolute; left: 0; top: 10px; width: 4px; height: 4px; background: var(--indigo); border-radius: 50%; }
+.copilot-next-steps { padding: 15px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-subtle); }
+.copilot-answer-notes { margin-top: 20px; font-size: 12px; line-height: 1.8; color: var(--text-secondary); }
+.copilot-answer-notes summary { cursor: pointer; color: var(--warn); }
+.copilot-answer-notes ul { margin-top: 9px; display: grid; gap: 6px; }
+.copilot-answer > footer { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 12px 17px; border-top: 1px solid var(--border); }
+.copilot-answer footer p { flex: 1; min-width: 150px; font-size: 10px; line-height: 1.7; color: var(--text-muted); }
+.copilot-answer-error { border-color: var(--warn); }
+.copilot-followups { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+.copilot-loading { display: flex; align-items: center; gap: 9px; padding: 20px; color: var(--text-secondary); font-size: 13px; }
+.copilot-loading svg { color: var(--indigo); }
+.copilot-failure { padding: 17px; background: var(--critical-tint); color: var(--critical); border: 1px solid var(--critical); border-radius: 12px; font-size: 13px; }
+.copilot-failure .godui-shimmer { margin-top: 12px; }
+.copilot-composer { position: sticky; bottom: 0; margin: 0 18px 16px; padding: 14px; border: 1px solid var(--border-strong); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-raised); }
+.copilot-composer > textarea { display: block; border: 0; min-height: 82px; max-height: 220px; resize: vertical; padding: 7px; font-size: 14px; line-height: 1.7; }
+.copilot-composer-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; border-top: 1px solid var(--border); padding-top: 12px; }
+.copilot-composer-tools > select { width: min(240px, 55%); min-height: 36px; font-size: 11px; }
+.copilot-composer-tools > span { font-size: 10px; color: var(--text-muted); }
+.copilot-composer-tools > button { margin-left: auto; }
+.copilot-composer-note { font-size: 10px; color: var(--text-muted); margin-top: 10px; }
+.copilot-history-toggle { display: none; }
+@media (max-width: 1100px) {
+  .copilot-layout { grid-template-columns: 1fr; }
+  .copilot-history { display: none; }
+  .copilot-layout[data-history-open="true"] .copilot-history { display: block; }
+  .copilot-history-toggle { display: inline-flex; }
+  .copilot-composer-tools > span { display: none; }
+}
+@media (max-width: 639px) {
+  .scenario-workflow { gap: 10px; font-size: 11px; }
+  .scenario-workflow-note { width: 100%; margin: 0; }
+  .scenario-brief { padding: 19px; }
+  .scenario-brief h2 { font-size: 20px; }
+  .copilot-thread { padding: 16px; }
+  .copilot-context-bar { padding: 13px 16px; }
+  .copilot-context-bar > span:last-child { font-size: 10px; }
+  .copilot-starters { grid-template-columns: 1fr; }
+  .copilot-empty { padding: 24px 0; }
+  .copilot-question > div { max-width: 95%; }
+  .copilot-answer-body { padding: 16px; }
+  .copilot-answer > header { padding: 12px; }
+  .copilot-answer header > span:last-child { margin-left: 37px; }
+  .copilot-composer { margin: 0 10px 10px; padding: 11px; }
+  .copilot-composer-tools > select { max-width: 58%; }
+}

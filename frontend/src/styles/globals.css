@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans text-body antialiased;
+    margin: 0;
+  }
+
+  /* Numeric columns must line up, so figures are tabular throughout. */
+  table,
+  [data-numeric],
+  time,
+  input[type="number"] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  code {
+    @apply text-identifier;
+    overflow-wrap: anywhere;
+  }
+
+  button, input, select, textarea, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2;
+    --tw-ring-offset-color: var(--surface);
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-semibold text-ink;
+  }
+
+  ::placeholder {
+    @apply text-ink-muted;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-card border border-line bg-surface;
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-header {
+    @apply flex items-start justify-between gap-3 border-b border-line px-4 py-3;
+  }
+
+  .card-title {
+    @apply text-card font-semibold text-ink;
+  }
+
+  .card-body {
+    @apply p-4;
+  }
+
+  .control {
+    @apply w-full rounded-control border border-line-strong bg-surface px-3 text-body text-ink placeholder:text-ink-muted;
+    @apply transition-colors hover:border-accent disabled:cursor-not-allowed disabled:bg-surface-subtle;
+  }
+
+  .control[aria-invalid="true"] {
+    @apply border-critical bg-critical-tint;
+  }
+
+  .icon-button {
+    @apply inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-control text-ink-secondary transition-colors hover:bg-surface-subtle hover:text-ink;
+  }
+
+  .disclosure {
+    @apply rounded-control border border-line bg-surface;
+  }
+
+  .disclosure > summary {
+    @apply cursor-pointer px-4 py-3 text-body font-medium text-ink;
+  }
+
+  .disclosure[open] > summary {
+    @apply border-b border-line;
+  }
+
+  .analysis-grid {
+    @apply grid grid-cols-1 gap-4 xl:grid-cols-2;
+  }
+
+  .workspace-nav {
+    margin: 12px 0 12px 12px;
+    border: 1px solid var(--nav-border);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+
+  .workspace-nav-link { transition: background-color var(--motion-base), box-shadow var(--motion-base); }
+  .workspace-nav-link[aria-current="page"] { box-shadow: inset 0 0 0 1px var(--nav-border); }
+  .workspace-nav-link svg { stroke-width: 1.65; }
+  .workspace-topbar { background: var(--canvas); }
+  .workspace-page-header { padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .workspace-page-header h1 { letter-spacing: -0.04em; }
+  .workspace-project-tabs { gap: 8px; padding: 8px; border: 1px solid var(--border); background: var(--surface-subtle); }
+
+  /* Keyboard users need a way past the navigation. */
+  .skip-link {
+    @apply sr-only;
+  }
+
+  .skip-link:focus {
+    @apply not-sr-only fixed left-3 top-3 z-[100] rounded-control bg-accent px-3 py-2 text-body font-medium text-ink-onaccent;
+  }
+}
+
+@media print {
+  [data-print-hide] {
+    display: none !important;
+  }
+
+  body {
+    background: var(--print-surface);
+    color: var(--print-text);
+  }
+
+  .card {
+    break-inside: avoid;
+    box-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
