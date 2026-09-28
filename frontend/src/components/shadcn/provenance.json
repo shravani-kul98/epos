@@ -1,0 +1,11 @@
+{
+  "source": "https://github.com/shadcn-ui/ui",
+  "component": "apps/v4/registry/new-york-v4/ui/empty.tsx",
+  "additional_components": ["apps/v4/registry/new-york-v4/ui/skeleton.tsx"],
+  "additional_destinations": ["frontend/src/components/ui/loading-skeleton.tsx"],
+  "retrieved": "2026-09-14",
+  "license": "MIT",
+  "adaptations": ["Existing EPOS semantic tokens and Tailwind 3 utilities", "Native paragraph and heading semantics", "Single icon variant avoids a new class-variance-authority dependency", "Skeleton slot and native div props retained with an EPOS neutral surface, bounded shimmer, reduced-motion fallback and shaped table/card placeholders"],
+  "inspiration_only": ["Linear conversation navigation", "Notion content hierarchy", "Tremor comparison layout", "Kokonut composer arrangement", "Radix keyboard guidance"],
+  "installed_frameworks": []
+}
