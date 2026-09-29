@@ -1,0 +1,23 @@
+{
+  "registry": "https://godui.design/r/{name}.json",
+  "source": "https://github.com/LucasBassetti/godui",
+  "license": "MIT",
+  "retrieved": "2026-09-14",
+  "method": "Reviewed registry source vendored with EPOS adaptations; CLI was not executed.",
+  "components": ["shimmer-button", "magic-input", "spotlight-card", "liquid-glass-card", "blueprint-grid", "magic-tab", "light-rays", "magic-button", "progress-fold-button"],
+  "adaptations": [
+    "Tailwind 3 compatible CSS using scoped EPOS semantic token aliases",
+    "Original animation, pointer interaction, layered input and refraction mechanisms retained",
+    "Accessible native props and existing EPOS form/modal semantics preserved",
+    "Reduced-motion, animation pause, ResizeObserver and browser API guards",
+    "Credit disclosure composes the glass panel with native button semantics; not an upstream popover",
+    "ShimmerButton adds neutral, ghost and destructive EPOS skins while preserving native handlers, refs and direct-child layout",
+    "MagicInput is the shared input default; HTML size, submit events and inline styles remain on the native input",
+    "MagicTab retains upstream layered selection and manual keyboard activation, adding tab/panel relationships and composed event handlers",
+    "LightRays retains the upstream conic fan, source glow and optional grain, adding a pause control and scoped color tokens",
+    "MagicButton retains the separate shadow, edge and lifted face, using restrained motion, opt-in rainbow, composed keyboard/blur handlers and a safe native button default",
+    "ProgressFoldButton retains the folded face, indeterminate sweep and controlled determinate fill; loading disables repeat submission, invalid percentages remain indeterminate, and EPOS supplies no invented progress. Progress semantics are outside the native button so assistive technology does not flatten them or change its accessible name",
+    "MetricCard and StatTile compose SpotlightCard around native links, buttons or static content; footer actions remain separate to avoid nested controls"
+  ],
+  "deferred": "GodUI command-palette, drawer, dropdown-menu, breadcrumbs and combobox require framer-motion. Existing navigation, modal logic, native select/textarea and data-heavy controls remain and are not claimed as upstream GodUI components. No new dependency was installed; shadcn adaptations have separate provenance."
+}
